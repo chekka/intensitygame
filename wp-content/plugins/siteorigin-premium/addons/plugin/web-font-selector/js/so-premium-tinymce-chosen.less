@@ -1,0 +1,59 @@
+.mce-container .mce-so-premium-font-selector {
+	margin-left: 5px;
+	margin-top: 1px;
+	position: relative;
+
+	.chosen-single {
+		min-height: 0;
+
+		abbr {
+			bottom: inherit;
+		}
+
+		span {
+			line-height: 24px;
+		}
+	}
+
+	.chosen-drop {
+		top: 0;
+		width: 100%;
+
+		.chosen-search .chosen-search-input {
+			box-sizing: border-box;
+		}
+	}
+
+
+	.field-wrapper {
+		display: inline-block;
+		margin-left: 5px;
+
+		label {
+			display: none;
+		}
+
+		select {
+			background-color: #fff;
+			border: 1px solid #ddd;
+			height: auto;
+		}
+	}
+
+	&.chosen-container-single .chosen-search {
+		&::after {
+			background: url('lib/chosen/chosen-sprite.png') no-repeat 100% -20px;
+			content: ' ';
+			display: block;
+			height: 19px;
+			position: absolute;
+			right: 4px;
+			top: 9px;
+			width: 19px;
+		}
+
+		input[type="text"] {
+			background: none !important;
+		}
+	}
+}

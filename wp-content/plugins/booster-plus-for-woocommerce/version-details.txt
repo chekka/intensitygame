@@ -1,0 +1,7 @@
+= 5.6.4 28/09/2022 =
+
+* FIXED - Added some Security vulnerability fixes.
+* FIXED - PHP Notice: Undefined Variable "_SESSION" in /includes/shortcodes/class-wcj-shortcodes-general.php...
+* FIXED - EMAILS & MISC. - Export - Fixed export order line break issue in this module.
+* WooCommerce 6.9.4 tested
+* WordPress 6.0.2 tested

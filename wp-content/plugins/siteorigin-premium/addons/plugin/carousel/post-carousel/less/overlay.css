@@ -1,0 +1,94 @@
+.sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item {
+  border-radius: default;
+  height: default;
+}
+.sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item:before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 59.98%, default 100%);
+  border-radius: default;
+}
+.sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item:not(.sow-carousel-default-thumbnail)::before {
+  background: #e0e0e0;
+}
+.sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item .sow-entry-categories a {
+  background: default;
+  color: default;
+}
+.sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item .sow-entry-categories a:focus,
+.sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item .sow-entry-categories a:hover {
+  background: default;
+  color: default;
+}
+.sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item default.sow-carousel-item-title {
+  color: #474747;
+  font-family: default;
+  font-size: 15px;
+  font-style: default;
+  font-weight: default;
+}
+@media (max-width: default) {
+  .sow-carousel-wrapper .sow-carousel-items .slick-track .sow-carousel-item default.sow-carousel-item-title {
+    line-height: normal;
+  }
+}
+@media (min-width: default) {
+  .sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows {
+    display: none;
+  }
+}
+@media (min-width: default) and (max-width: default) {
+  .sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows {
+    display: none;
+  }
+}
+@media (min-width: default) and (max-width: default) {
+  .sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows {
+    display: none;
+  }
+}
+@media (max-width: default) {
+  .sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows {
+    display: none;
+  }
+}
+.sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows a.sow-carousel-next,
+.sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows a.sow-carousel-previous {
+  color: #fff;
+}
+.sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows a.sow-carousel-next:focus,
+.sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows a.sow-carousel-previous:focus,
+.sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows a.sow-carousel-next:hover,
+.sow-carousel-wrapper .sow-carousel-nav .sow-carousel-nav-arrows a.sow-carousel-previous:hover {
+  color: default;
+}
+.sow-carousel-wrapper .sow-carousel-nav {
+  margin: default 0 0;
+}
+@media (min-width: default) {
+  .sow-carousel-wrapper .slick-dots {
+    display: none !important;
+  }
+}
+@media (min-width: default) and (max-width: default) {
+  .sow-carousel-wrapper .slick-dots {
+    display: none !important;
+  }
+}
+@media (min-width: default) and (max-width: default) {
+  .sow-carousel-wrapper .slick-dots {
+    display: none !important;
+  }
+}
+@media (max-width: default) {
+  .sow-carousel-wrapper .slick-dots {
+    display: none !important;
+  }
+}
+.sow-carousel-wrapper .slick-dots li.slick-active button:before {
+  color: default;
+}
+.sow-carousel-wrapper .slick-dots li button:hover:before {
+  color: default;
+}
+.sow-carousel-wrapper .slick-dots li button:before {
+  color: default;
+}

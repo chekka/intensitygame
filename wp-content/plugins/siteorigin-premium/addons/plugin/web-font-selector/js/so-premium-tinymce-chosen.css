@@ -1,0 +1,46 @@
+.mce-container .mce-so-premium-font-selector {
+  margin-left: 5px;
+  margin-top: 1px;
+  position: relative;
+}
+.mce-container .mce-so-premium-font-selector .chosen-single {
+  min-height: 0;
+}
+.mce-container .mce-so-premium-font-selector .chosen-single abbr {
+  bottom: inherit;
+}
+.mce-container .mce-so-premium-font-selector .chosen-single span {
+  line-height: 24px;
+}
+.mce-container .mce-so-premium-font-selector .chosen-drop {
+  top: 0;
+  width: 100%;
+}
+.mce-container .mce-so-premium-font-selector .chosen-drop .chosen-search .chosen-search-input {
+  box-sizing: border-box;
+}
+.mce-container .mce-so-premium-font-selector .field-wrapper {
+  display: inline-block;
+  margin-left: 5px;
+}
+.mce-container .mce-so-premium-font-selector .field-wrapper label {
+  display: none;
+}
+.mce-container .mce-so-premium-font-selector .field-wrapper select {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  height: auto;
+}
+.mce-container .mce-so-premium-font-selector.chosen-container-single .chosen-search::after {
+  background: url('lib/chosen/chosen-sprite.png') no-repeat 100% -20px;
+  content: ' ';
+  display: block;
+  height: 19px;
+  position: absolute;
+  right: 4px;
+  top: 9px;
+  width: 19px;
+}
+.mce-container .mce-so-premium-font-selector.chosen-container-single .chosen-search input[type="text"] {
+  background: none !important;
+}

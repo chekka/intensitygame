@@ -1,0 +1,8 @@
+wp-config.php
+wp-content/updraft
+wp-content/uploads
+wp-content/et-cache
+wp-content/cache/matomo
+wp-content/*.js
+.well-known
+.vscode
