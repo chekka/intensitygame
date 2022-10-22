@@ -34,10 +34,7 @@ class WPDesk_Flexible_Shipping_Tracker implements Hookable {
 	 * Hooks.
 	 */
 	public function hooks() {
-		add_filter( 'wpdesk_tracker_data', array( $this, 'wpdesk_tracker_data_flexible_shipping' ), self::TRACKER_DATA_FILTER_PRIORITY );
-		add_filter( 'wpdesk_tracker_notice_screens', array( $this, 'wpdesk_tracker_notice_screens' ) );
-
-		add_filter( self::PLUGIN_ACTION_LINKS_FILTER_NAME, array( $this, 'plugin_action_links' ) );
+		add_filter( 'wpdesk_tracker_data', [ $this, 'wpdesk_tracker_data_flexible_shipping' ], self::TRACKER_DATA_FILTER_PRIORITY );
 	}
 
 	/**
@@ -53,17 +50,17 @@ class WPDesk_Flexible_Shipping_Tracker implements Hookable {
 		$flexible_shipping = $all_shipping_methods['flexible_shipping'];
 
 		$flexible_shipping_rates                                      = $flexible_shipping->get_all_rates();
-		$data['flexible_shipping']                                    = array();
+		$data['flexible_shipping']                                    = [];
 		$data['flexible_shipping']['total_shipping_methods']          = 0;
 		$data['flexible_shipping']['group_shipping_methods']          = 0;
 		$data['flexible_shipping']['single_shipping_methods']         = 0;
 		$data['flexible_shipping']['avg_rules']                       = 0;
 		$data['flexible_shipping']['max_rules']                       = 0;
-		$data['flexible_shipping']['integrations']                    = array();
-		$data['flexible_shipping']['free_shipping_requires']          = array();
-		$data['flexible_shipping']['calculation_methods']             = array();
-		$data['flexible_shipping']['based_on']                        = array();
-		$data['flexible_shipping']['shipping_class_option']           = array();
+		$data['flexible_shipping']['integrations']                    = [];
+		$data['flexible_shipping']['free_shipping_requires']          = [];
+		$data['flexible_shipping']['calculation_methods']             = [];
+		$data['flexible_shipping']['based_on']                        = [];
+		$data['flexible_shipping']['shipping_class_option']           = [];
 		$data['flexible_shipping']['method_description_count']        = 0;
 		$data['flexible_shipping']['free_shipping_label_count']       = 0;
 		$data['flexible_shipping']['free_shipping_cart_notice_count'] = 0;
@@ -160,54 +157,6 @@ class WPDesk_Flexible_Shipping_Tracker implements Hookable {
 		}
 
 		return $data;
-	}
-
-	/**
-	 * Tracker notice screens.
-	 *
-	 * @param array $screens Screens.
-	 *
-	 * @return array
-	 */
-	public function wpdesk_tracker_notice_screens( $screens ) {
-		$current_screen = get_current_screen();
-		if ( 'woocommerce_page_wc-settings' === $current_screen->id ) {
-			if ( isset( $_GET['tab'] ) && 'shipping' === sanitize_key( $_GET['tab'] ) ) {
-				$screens[] = $current_screen->id;
-			}
-		}
-
-		return $screens;
-	}
-
-	/**
-	 * Add action links.
-	 *
-	 * @param array $links Links.
-	 *
-	 * @return array
-	 */
-	public function plugin_action_links( $links ) {
-		if ( ! wpdesk_tracker_enabled() || apply_filters( 'wpdesk_tracker_do_not_ask', false ) ) {
-			return $links;
-		}
-		$options = get_option( 'wpdesk_helper_options', array() );
-		if ( ! is_array( $options ) ) {
-			$options = array();
-		}
-		if ( empty( $options['wpdesk_tracker_agree'] ) ) {
-			$options['wpdesk_tracker_agree'] = '0';
-		}
-		$plugin_links = array();
-		if ( '0' === $options['wpdesk_tracker_agree'] ) {
-			$opt_in_link    = admin_url( 'admin.php?page=wpdesk_tracker&plugin=' . self::FLEXIBLE_SHIPPING_PLUGIN_FILE );
-			$plugin_links[] = '<a href="' . $opt_in_link . '">' . __( 'Opt-in', 'flexible-shipping' ) . '</a>';
-		} else {
-			$opt_in_link    = admin_url( 'plugins.php?wpdesk_tracker_opt_out=1&plugin=' . self::FLEXIBLE_SHIPPING_PLUGIN_FILE );
-			$plugin_links[] = '<a href="' . $opt_in_link . '">' . __( 'Opt-out', 'flexible-shipping' ) . '</a>';
-		}
-
-		return array_merge( $plugin_links, $links );
 	}
 
 }

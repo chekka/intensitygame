@@ -84,13 +84,15 @@ class BulkAction implements Hookable {
 
 	/**
 	 * @param string $redirect_to .
-	 * @param string $do_action   .
+	 * @param string $action      .
 	 * @param array  $post_ids    .
 	 *
 	 * @return string
 	 */
-	public function handle_bulk_action( $redirect_to, $do_action, $post_ids ): string {
-		return $this->handle_action( $redirect_to, $do_action, $post_ids );
+	public function handle_bulk_action( $redirect_to, $action, $post_ids ): string {
+		$redirect_to = is_string( $redirect_to ) ? $redirect_to : add_query_arg( 'post_type', 'shop_order', admin_url( 'edit.php' ) );
+
+		return $this->handle_action( $redirect_to, $action, $post_ids );
 	}
 
 	/**

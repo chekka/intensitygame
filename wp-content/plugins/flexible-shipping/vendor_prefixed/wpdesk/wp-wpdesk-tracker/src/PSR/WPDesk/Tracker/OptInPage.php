@@ -58,10 +58,12 @@ class OptInPage implements \FSVendor\WPDesk\PluginBuilder\Plugin\Hookable
     {
         if (isset($_GET['wpdesk_tracker']) && $_GET['wpdesk_tracker'] === $this->plugin_slug) {
             if (isset($_GET['allow']) && isset($_GET['security']) && \wp_verify_nonce($_GET['security'], $this->plugin_slug)) {
-                $persistence = new \FSVendor\WPDesk_Tracker_Persistence_Consent();
-                $persistence->set_active(\true);
-                \delete_option('wpdesk_tracker_notice');
-                \update_option('wpdesk_tracker_agree', '1');
+                if ($_GET['allow'] === '1') {
+                    $persistence = new \FSVendor\WPDesk_Tracker_Persistence_Consent();
+                    $persistence->set_active(\true);
+                    \delete_option('wpdesk_tracker_notice');
+                    \update_option('wpdesk_tracker_agree', '1');
+                }
                 if (\wp_safe_redirect(\admin_url('plugins.php'))) {
                     exit;
                 }
