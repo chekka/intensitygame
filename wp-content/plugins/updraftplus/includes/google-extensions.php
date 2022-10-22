@@ -30,7 +30,7 @@ class UpdraftPlus_Google_Http_MediaFileUpload extends Google_Http_MediaFileUploa
  * limitations under the License.
  */
 
-if (!class_exists('UDP_Google_Client')) {
+if (!class_exists('Google_Client')) {
   require_once dirname(__FILE__) . '/Google/autoload.php';
 }
 
@@ -71,7 +71,7 @@ public function updraftplus_getResumeUri() { return $this->resumeUri; }
   /** @var int $progress */
   private $progress;
 
-  /** @var UDP_Google_Client */
+  /** @var Google_Client */
   private $client;
 
   /** @var Google_Http_Request */
@@ -94,8 +94,8 @@ public function updraftplus_getResumeUri() { return $this->resumeUri; }
    * only used if resumable=True
    */
   public function __construct(
-      UDP_Google_Client $client,
-      UDP_Google_Http_Request $request,
+      Google_Client $client,
+      Google_Http_Request $request,
       $mimeType,
       $data,
       $resumable = false,
@@ -106,7 +106,7 @@ public function updraftplus_getResumeUri() { return $this->resumeUri; }
     $this->request = $request;
     $this->mimeType = $mimeType;
     $this->data = $data;
-    $this->size = is_null($this->data) ? 0 : strlen($this->data);
+    $this->size = strlen($this->data);
     $this->resumable = $resumable;
     if (!$chunkSize) {
       $chunkSize = 256 * 1024;
@@ -148,7 +148,6 @@ public function updraftplus_getResumeUri() { return $this->resumeUri; }
 
   /**
    * Send the next part of the file to upload.
-   *
    * @param [$chunk] the next set of bytes to send. If false will used $data passed
    * at construct time.
    */
@@ -166,18 +165,18 @@ public function updraftplus_getResumeUri() { return $this->resumeUri; }
     $headers = array(
       'content-range' => "bytes $this->progress-$lastBytePos/$this->size",
       'content-type' => $this->request->getRequestHeader('content-type'),
-      'content-length' => strlen($chunk),
+      'content-length' => $this->chunkSize,
       'expect' => '',
     );
 
-    $httpRequest = new UDP_Google_Http_Request(
+    $httpRequest = new Google_Http_Request(
         $this->resumeUri,
         'PUT',
         $headers,
         $chunk
     );
 
-    if ($this->client->getClassConfig("UDP_Google_Http_Request", "enable_gzip_for_uploads")) {
+    if ($this->client->getClassConfig("Google_Http_Request", "enable_gzip_for_uploads")) {
       $httpRequest->enableGzip();
     } else {
       $httpRequest->disableGzip();
@@ -202,7 +201,7 @@ public function updraftplus_getResumeUri() { return $this->resumeUri; }
       // No problems, but upload not complete.
       return false;
     } else {
-      return UDP_Google_Http_REST::decodeHttpResponse($response, $this->client);
+      return Google_Http_REST::decodeHttpResponse($response, $this->client);
     }
   }
 

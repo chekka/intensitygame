@@ -3,7 +3,7 @@ Contributors: GetResponse
 Tags: getresponse, getresponse360, email, newsletter, signup, marketing, plugin, widget, mailing list, subscriber, contacts, subscribe form, woocommerce, buddypress
 Requires at least: 3.3.0
 Tested up to: 6.0
-Stable tag: 5.5.29
+Stable tag: 5.5.30
 Requires PHP: 5.6
 
 Take advantage of your visitors' commentators' and customers' interest. Invite them to subscribe and nurture their engagement. Track site visits and pass ecommerce data to **GetResponse** to keep your list growing and ensure you have the contact information and ecommerce data to plan successful marketing campaigns.
@@ -72,6 +72,10 @@ You can find it on your GetResponse account in Profile >> Integrations & API >> 
 
 
 == Changelog ==
+
+= v5.5.30 =
+
+* Fix for authorization with domain
 
 = v5.5.29 =
 

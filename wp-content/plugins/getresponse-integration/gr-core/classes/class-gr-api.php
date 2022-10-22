@@ -415,7 +415,7 @@ class Api {
 
 		// for GetResponse 360
 		if ( isset( $this->domain ) ) {
-			$headers[] = 'X-Domain: ' . $this->domain;
+			$headers['X-Domain'] = $this->domain;
 		}
 
         $args = array(

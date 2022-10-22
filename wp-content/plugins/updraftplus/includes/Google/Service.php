@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-class UDP_Google_Service
+class Google_Service
 {
   public $rootUrl;
   public $version;
@@ -24,14 +24,14 @@ class UDP_Google_Service
   public $resource;
   private $client;
 
-  public function __construct(UDP_Google_Client $client)
+  public function __construct(Google_Client $client)
   {
     $this->client = $client;
   }
 
   /**
-   * Return the associated UDP_Google_Client class.
-   * @return UDP_Google_Client
+   * Return the associated Google_Client class.
+   * @return Google_Client
    */
   public function getClient()
   {

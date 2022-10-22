@@ -5,6 +5,11 @@
  * @package Flexible Shippign
  */
 
+use FSVendor\Octolize\Tracker\OptInNotice\ShouldDisplayAndConditions;
+use FSVendor\Octolize\Tracker\OptInNotice\ShouldDisplayGetParameterValue;
+use FSVendor\Octolize\Tracker\OptInNotice\ShouldDisplayOrConditions;
+use FSVendor\Octolize\Tracker\OptInNotice\ShouldDisplayShippingMethodInstanceSettings;
+use FSVendor\Octolize\Tracker\TrackerInitializer;
 use FSVendor\WPDesk\FS\Compatibility\PluginCompatibility;
 use FSVendor\WPDesk\FS\Shipment\ShipmentFunctionality;
 use FSVendor\WPDesk\FS\TableRate\Logger\Assets;
@@ -17,9 +22,6 @@ use FSVendor\WPDesk\PluginBuilder\Plugin\HookableCollection;
 use FSVendor\WPDesk\PluginBuilder\Plugin\HookableParent;
 use FSVendor\WPDesk\PluginBuilder\Plugin\TemplateLoad;
 use FSVendor\WPDesk\Session\SessionFactory;
-use FSVendor\WPDesk\Tracker\Deactivation\PluginData;
-use FSVendor\WPDesk\Tracker\Deactivation\Thickbox;
-use FSVendor\WPDesk\Tracker\Deactivation\TrackerFactory;
 use FSVendor\WPDesk\View\Resolver\ChainResolver;
 use FSVendor\WPDesk\View\Resolver\DirResolver;
 use FSVendor\WPDesk\View\Resolver\WPThemeResolver;
@@ -70,7 +72,6 @@ use WPDesk\FS\TableRate\ShippingMethodSingle;
 use WPDesk\FS\TableRate\Tax\Tracker;
 use WPDesk\FS\TableRate\UserFeedback;
 use WPDesk\FS\TableRate\ContextualInfo;
-use WPDesk\FS\Tracker\TrackerNotices;
 use WPDesk\FS\Shipment;
 
 /**
@@ -201,10 +202,6 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 		new WPDesk_Flexible_Shipping_Multilingual( $this );
 
 		$this->admin_notices = new WPDesk_Flexible_Shipping_Admin_Notices( $this );
-
-		$this->add_hookable( new WPDesk_Flexible_Shipping_Tracker() );
-
-		$this->add_hookable( new TrackerData() );
 
 		$this->add_hookable( new WPDesk\FS\Rate\WPDesk_Flexible_Shipping_Rate_Notice() );
 
@@ -379,6 +376,7 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 		$this->init_base_variables();
 		$this->init_renderer();
 		$this->load_dependencies();
+		$this->init_tracker();
 		$this->hooks();
 		$this->init_assets_url_on_rules_settings_field();
 	}
@@ -432,10 +430,6 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 		);
 
 		add_filter( 'option_woocommerce_cod_settings', [ $this, 'option_woocommerce_cod_settings' ] );
-
-		add_action( 'plugins_loaded', [ $this, 'create_tracker' ], self::PRIORITY_BEFORE_SHARED_HELPER );
-
-		add_action( 'admin_init', [ $this, 'init_deactivation_tracker' ] );
 
 		add_action( 'woocommerce_init', [ $this, 'init_free_shipping_notice' ] );
 
@@ -498,32 +492,35 @@ class Flexible_Shipping_Plugin extends AbstractPlugin implements HookableCollect
 	}
 
 	/**
-	 * Init deactivation tracker.
+	 * Init tracker.
 	 */
-	public function init_deactivation_tracker() {
-		$plugin_data          = new PluginData(
-			WPDesk_Flexible_Shipping_Tracker::FLEXIBLE_SHIPPING_PLUGIN_SLUG,
-			WPDesk_Flexible_Shipping_Tracker::FLEXIBLE_SHIPPING_PLUGIN_FILE,
-			WPDesk_Flexible_Shipping_Tracker::FLEXIBLE_SHIPPING_PLUGIN_TITLE
+	private function init_tracker() {
+		$this->add_hookable(
+			TrackerInitializer::create_from_plugin_info( $this->plugin_info, $this->prepare_shoud_display_for_flexible_shipping() )
 		);
-		$deactivation_tracker = TrackerFactory::createCustomTracker(
-			$plugin_data,
-			null,
-			new Thickbox(
-				$plugin_data,
-				__DIR__ . '/views/deactivation_thickbox.php'
-			)
-		);
-		$deactivation_tracker->hooks();
+		$this->add_hookable( new WPDesk_Flexible_Shipping_Tracker() );
+		$this->add_hookable( new TrackerData() );
 	}
 
 	/**
-	 * Maybe create tracker.
+	 * @return ShouldDisplayOrConditions
 	 */
-	public function create_tracker() {
-		$tracker_factory = new WPDesk_Tracker_Factory();
-		$tracker_factory->create_tracker( basename( dirname( __FILE__ ) ) );
-		( new TrackerNotices() )->hooks();
+	private function prepare_shoud_display_for_flexible_shipping() {
+		$should_display = new ShouldDisplayOrConditions();
+		$should_display->add_should_diaplay_condition( new ShouldDisplayShippingMethodInstanceSettings( ShippingMethodSingle::SHIPPING_METHOD_ID ) );
+		$should_display_and_conditions = new ShouldDisplayAndConditions();
+		$should_display_and_conditions->add_should_diaplay_condition(
+			new ShouldDisplayGetParameterValue( 'page', 'wc-settings' )
+		);
+		$should_display_and_conditions->add_should_diaplay_condition(
+			new ShouldDisplayGetParameterValue( 'tab', 'shipping' )
+		);
+		$should_display_and_conditions->add_should_diaplay_condition(
+			new ShouldDisplayGetParameterValue( 'section', WPDesk_Flexible_Shipping_Settings::METHOD_ID )
+		);
+		$should_display->add_should_diaplay_condition( $should_display_and_conditions );
+
+		return $should_display;
 	}
 
 	/**

@@ -18,17 +18,19 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 	/**
 	 * This function does not catch any exceptions - that should be done by the caller
 	 *
-	 * @param  String  $user
-	 * @param  String  $apikey
-	 * @param  String  $authurl
-	 * @param  Boolean $useservercerts
-	 * @return Array
+	 * @param  string  $user
+	 * @param  string  $apikey
+	 * @param  string  $authurl
+	 * @param  boolean $useservercerts
+	 * @return array
 	 */
 	private function getCF($user, $apikey, $authurl, $useservercerts = false) {
 		
 		$storage = $this->get_storage();
 		if (!empty($storage)) return $storage;
 		
+		global $updraftplus;
+
 		if (!class_exists('UpdraftPlus_CF_Authentication')) include_once(UPDRAFTPLUS_DIR.'/includes/cloudfiles/cloudfiles.php');
 
 		if (!defined('UPDRAFTPLUS_SSL_DISABLEVERIFY')) define('UPDRAFTPLUS_SSL_DISABLEVERIFY', UpdraftPlus_Options::get_updraft_option('updraft_ssl_disableverify'));
@@ -57,7 +59,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 	 */
 	public function get_supported_features() {
 		// This options format is handled via only accessing options via $this->get_options()
-		return array('multi_options', 'config_templates', 'multi_storage', 'conditional_logic');
+		return array('multi_options', 'config_templates', 'multi_storage');
 	}
 
 	/**
@@ -75,21 +77,9 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 		);
 	}
 	
-	/**
-	 * Check whether options have been set up by the user, or not
-	 *
-	 * @param Array $opts - the potential options
-	 *
-	 * @return Boolean
-	 */
-	public function options_exist($opts) {
-		if (is_array($opts) && isset($opts['user']) && '' != $opts['user'] && !empty($opts['apikey'])) return true;
-		return false;
-	}
-
 	public function backup($backup_array) {
 
-		global $updraftplus;
+		global $updraftplus, $updraftplus_backup;
 
 		$opts = $this->get_options();
 
@@ -116,7 +106,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 
 		$chunk_size = 5*1024*1024;
 
-		foreach ($backup_array as $file) {
+		foreach ($backup_array as $key => $file) {
 
 			$fullpath = $updraft_dir.$file;
 			$orig_file_size = filesize($fullpath);
@@ -275,22 +265,16 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 		return $results;
 
 	}
-	
-	/**
-	 * Delete a single file from the service using the CloudFiles API
-	 *
-	 * @param Array $files         - array of file paths to delete
-	 * @param Array $cloudfilesarr - CloudFiles container and object details
-	 * @param Array $sizeinfo      - unused here
-	 * @return Boolean|String - either a boolean true or an error code string
-	 */
-	public function delete($files, $cloudfilesarr = false, $sizeinfo = array()) {// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- $sizeinfo is unused
 
+	public function delete($files, $cloudfilesarr = false, $sizeinfo = array()) {// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
+
+		global $updraftplus;
 		if (is_string($files)) $files =array($files);
 
 		if ($cloudfilesarr) {
 			$container_object = $cloudfilesarr['cloudfiles_object'];
 			$container = $cloudfilesarr['cloudfiles_container'];
+			$path = $cloudfilesarr['cloudfiles_orig_path'];
 		} else {
 			try {
 				$opts = $this->get_options();
@@ -300,7 +284,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 			} catch (Exception $e) {
 				$this->log('authentication failed ('.$e->getMessage().')');
 				$this->log(__('authentication failed', 'updraftplus').' ('.$e->getMessage().')', 'error');
-				return 'authentication_fail';
+				return false;
 			}
 		}
 
@@ -312,6 +296,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 			$this->log("Delete remote: container=$container, path=$fpath");
 
 			// We need to search for chunks
+			// $chunk_path = ($path == '') ? "chunk-do-not-delete-$file_" : "$path/chunk-do-not-delete-$file_";
 			$chunk_path = "chunk-do-not-delete-$file";
 
 			try {
@@ -330,7 +315,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 				$this->log('Deleted: '.$fpath);
 			} catch (Exception $e) {
 				$this->log('delete failed: '.$e->getMessage());
-				$ret = 'file_delete_error';
+				$ret = false;
 			}
 		}
 		return $ret;
@@ -515,7 +500,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
  * Modifies handerbar template options
  *
  * @param array $opts handerbar template options
- * @return Array - Modified handerbar template options
+ * @return array - Modified handerbar template options
  */
 	public function transform_options_for_template($opts) {
 		$opts['apikey'] = trim($opts['apikey']);

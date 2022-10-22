@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-09-27 15:54:03+0000\n"
+"PO-Revision-Date: 2022-10-18 15:54:03+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -8,6 +8,11 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: de\n"
 "Project-Id-Version: WooCommerce - WooCommerce Payments\n"
+
+#. translators: customer email
+#: includes/class-wc-payment-token-wcpay-link.php:53
+msgid "Stripe Link email %s"
+msgstr "Stripe-Link-E-Mail %s"
 
 #: includes/notes/class-wc-payments-notes-set-https-for-checkout.php:52
 msgid "Enable HTTPS on your checkout pages to display all available payment methods and protect your customers data."
@@ -115,15 +120,15 @@ msgstr "In den <a>Protokollen</a> findest du nähere Informationen zu diesem Pro
 msgid "Express checkouts:"
 msgstr "Express-Zahlungen:"
 
-#: client/settings/express-checkout-settings/file-upload.tsx:148
+#: client/settings/express-checkout-settings/file-upload.tsx:146
 msgid "Use a custom logo to WooPay if the one taken from your store doesn’t look right. For best results, upload a high-resolution horizontal image with white or transparent background."
 msgstr "Verwende ein individuelles Logo für WooPay, wenn das aus deinem Shop übernommene nicht richtig aussieht. Lade ein hochauflösendes horizontales Bild mit weißem oder transparentem Hintergrund hoch, um die besten Ergebnisse zu erhalten."
 
-#: client/settings/express-checkout-settings/file-upload.tsx:146
+#: client/settings/express-checkout-settings/file-upload.tsx:144
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: client/settings/express-checkout-settings/file-upload.tsx:141
+#: client/settings/express-checkout-settings/file-upload.tsx:139
 msgid "Upload custom logo"
 msgstr "Individuelles Logo hochladen"
 
@@ -473,7 +478,7 @@ msgid "No valid event name or type."
 msgstr "Kein gültiger Veranstaltungsname oder -typ."
 
 #: includes/class-platform-checkout-tracker.php:67
-#: includes/class-wc-payments.php:1021
+#: includes/class-wc-payments.php:1030
 msgid "You aren’t authorized to do that."
 msgstr "Du bist dazu nicht autorisiert."
 
@@ -523,11 +528,7 @@ msgstr "Festgelegte Gebühr"
 msgid "Mobile phone number"
 msgstr "Mobiltelefonnummer"
 
-#: includes/class-wc-payments.php:1139
-msgid "Email address"
-msgstr "E-Mail-Adresse"
-
-#: includes/class-wc-payments.php:1132
+#: includes/class-wc-payments.php:1141
 msgid "Contact information"
 msgstr "Kontaktinformationen"
 
@@ -644,31 +645,31 @@ msgstr "Filter für Reklamationsstatus entfernen"
 msgid "There was a problem creating your subscription. %1$s doesn't meet the %2$sminimum recurring amount%3$s this payment method can process."
 msgstr "Bei der Erstellung deines Abonnements ist ein Problem aufgetreten. %1$s entspricht nicht dem %2$sminimalen wiederkehrenden Betrag%3$s, der mit dieser Zahlungsmethode verarbeitet werden kann."
 
-#: includes/class-wc-payments-webhook-processing-service.php:661
+#: includes/class-wc-payments-webhook-processing-service.php:659
 msgid "The payment was not able to be processed."
 msgstr "Die Zahlung konnte nicht verarbeitet werden."
 
-#: includes/class-wc-payments-webhook-processing-service.php:657
+#: includes/class-wc-payments-webhook-processing-service.php:655
 msgid "You have exceeded the number of allowed verification attempts."
 msgstr "Du hast die maximale Anzahl von Verifizierungsversuchen überschritten."
 
-#: includes/class-wc-payments-webhook-processing-service.php:654
+#: includes/class-wc-payments-webhook-processing-service.php:652
 msgid "Microdeposit transfers failed. Please check the account, institution and transit numbers."
 msgstr "Mikroüberweisung nicht erfolgreich. Überprüfe das Konto, das Geldinstitut und die Transitnummern."
 
-#: includes/class-wc-payments-webhook-processing-service.php:651
+#: includes/class-wc-payments-webhook-processing-service.php:649
 msgid "The customer's bank account could not be located."
 msgstr "Das Bankkonto des Kunden konnte nicht ermittelt werden."
 
-#: includes/class-wc-payments-webhook-processing-service.php:648
+#: includes/class-wc-payments-webhook-processing-service.php:646
 msgid "The customer's account has insufficient funds to cover this payment."
 msgstr "Das Kundenkonto verfügt nicht über ausreichende Mittel zur Abwicklung der Zahlung."
 
-#: includes/class-wc-payments-webhook-processing-service.php:645
+#: includes/class-wc-payments-webhook-processing-service.php:643
 msgid "The customer has notified their bank that this payment was unauthorized."
 msgstr "Der Kunde hat seine Bank darüber informiert, dass diese Zahlung nicht durch ihn autorisiert wurde."
 
-#: includes/class-wc-payments-webhook-processing-service.php:642
+#: includes/class-wc-payments-webhook-processing-service.php:640
 msgid "The customer's bank account has been closed."
 msgstr "Das Bankkonto des Kunden wurde geschlossen."
 
@@ -809,19 +810,19 @@ msgid "A payment of %1$s <strong>failed</strong>. %2$s"
 msgstr "Zahlung von %1$s <strong>fehlgeschlagen</strong>. %2$s"
 
 #. translators: %1: the dispute message, %2: the dispute details URL
-#: includes/class-wc-payments-webhook-processing-service.php:518
+#: includes/class-wc-payments-webhook-processing-service.php:516
 msgid "%1$s. See <a href=\"%2$s\">dispute overview</a> for more details."
 msgstr "%1$s. Im <a href=\"%2$s\">Reklamationsüberblick</a> findest du weitere Details."
 
-#: includes/class-wc-payments-webhook-processing-service.php:513
+#: includes/class-wc-payments-webhook-processing-service.php:511
 msgid "Payment dispute has been updated"
 msgstr "Zahlungsreklamation wurde aktualisiert"
 
-#: includes/class-wc-payments-webhook-processing-service.php:510
+#: includes/class-wc-payments-webhook-processing-service.php:508
 msgid "Payment dispute funds have been reinstated"
 msgstr "Geld für Zahlungsreklamation wurde dem Konto gutgeschrieben"
 
-#: includes/class-wc-payments-webhook-processing-service.php:507
+#: includes/class-wc-payments-webhook-processing-service.php:505
 msgid "Payment dispute funds have been withdrawn"
 msgstr "Geld für Zahlungsreklamation wurde vom Konto eingezogen"
 
@@ -942,11 +943,11 @@ msgstr "Kredit-/Debitkarte"
 msgid "Payment cannot be captured for partially or fully refunded orders."
 msgstr "Für teilweise oder vollständig rückerstattete Bestellungen kann keine Zahlung gebucht werden."
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:1411
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1412
 msgid "Price ID is required"
 msgstr "Preis-ID ist erforderlich"
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:1387
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1388
 msgid "Product ID is required"
 msgstr "Produkt-ID ist erforderlich"
 
@@ -1043,7 +1044,7 @@ msgstr "Währungs-Umschalter-Widget"
 msgid "WooCommerce Payments Subscriptions feature flag setting."
 msgstr "Einstellung der Markierung für das Abonnement-Feature von WooCommerce Payments."
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:1786
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1787
 msgid "Address country and line 1 are required."
 msgstr "Für die Adresse müssen Land und Adresszeile 1 angegeben werden."
 
@@ -1489,7 +1490,7 @@ msgid "Credit card / debit card"
 msgstr "Kredit-/Debitkarte"
 
 #: client/components/file-upload/index.tsx:42
-#: client/settings/express-checkout-settings/file-upload.tsx:147
+#: client/settings/express-checkout-settings/file-upload.tsx:145
 msgid "Remove file"
 msgstr "Datei entfernen"
 
@@ -1497,7 +1498,7 @@ msgstr "Datei entfernen"
 msgid "Finish setup"
 msgstr "Einrichtung abschließen"
 
-#: includes/class-wc-payments-token-service.php:210
+#: includes/class-wc-payments-token-service.php:218
 msgid "SEPA IBAN"
 msgstr "SEPA IBAN"
 
@@ -1507,7 +1508,7 @@ msgid "SEPA IBAN ending in %s"
 msgstr "SEPA IBAN mit der Endung %s"
 
 #. translators: %1: intent ID
-#: includes/class-wc-payments-webhook-processing-service.php:615
+#: includes/class-wc-payments-webhook-processing-service.php:613
 msgid "Could not find order via intent ID: %1$s"
 msgstr "Bestellung konnte über die Zahlungsabsichts-ID nicht gefunden werden: %1$s"
 
@@ -1546,7 +1547,6 @@ msgstr "Erweiterte Filter"
 msgid "Show"
 msgstr "Anzeigen"
 
-#: client/disputes/filters/config.ts:41
 #: client/transactions/filters/config.ts:57
 msgid "All currencies"
 msgstr "Alle Währungen"
@@ -1923,7 +1923,7 @@ msgid "Learn more"
 msgstr "Erfahre mehr"
 
 #. translators: This is an error API response.
-#: includes/wc-payment-api/class-wc-payments-api-client.php:2231
+#: includes/wc-payment-api/class-wc-payments-api-client.php:2232
 msgctxt "API error message to throw as Exception"
 msgid "Error: %1$s"
 msgstr "Fehler: %1$s"
@@ -1933,7 +1933,7 @@ msgid "The version of Jetpack installed is too old to be used with WooCommerce P
 msgstr "Die installierte Jetpack-Version ist zu alt für WooCommerce Payments. WooCommerce Payments wurde deaktiviert. Deaktiviere oder aktualisiere Jetpack."
 
 #. translators: %1: original error message.
-#: includes/class-wc-payments.php:1093
+#: includes/class-wc-payments.php:1102
 #: includes/wc-payment-api/class-wc-payments-http.php:114
 msgid "Http request failed. Reason: %1$s"
 msgstr "HTTP-Anfrage fehlgeschlagen. Grund: %1$s"
@@ -1942,23 +1942,23 @@ msgstr "HTTP-Anfrage fehlgeschlagen. Grund: %1$s"
 msgid "Site is not connected to WordPress.com"
 msgstr "Website ist nicht mit WordPress.com verbunden"
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:2226
+#: includes/wc-payment-api/class-wc-payments-api-client.php:2227
 msgid "Server error. Please try again."
 msgstr "Server Fehler! Bitte versuchen sie es nocheinmal!"
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:2192
+#: includes/wc-payment-api/class-wc-payments-api-client.php:2193
 msgid "Unable to decode response from WooCommerce Payments API"
 msgstr "Antwort von WooCommerce Payments API kann nicht entschlüsselt werden"
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:2035
+#: includes/wc-payment-api/class-wc-payments-api-client.php:2036
 msgid "Unable to encode body for request to WooCommerce Payments API."
 msgstr "Text für Anfrage an WooCommerce Payments API kann nicht verschlüsselt werden"
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:1344
+#: includes/wc-payment-api/class-wc-payments-api-client.php:1345
 msgid "Customer ID is required"
 msgstr "Kunden-ID erforderlich"
 
-#: includes/wc-payment-api/class-wc-payments-api-client.php:979
+#: includes/wc-payment-api/class-wc-payments-api-client.php:980
 msgid "Max file size exceeded."
 msgstr "Maximale Dateigröße überschritten."
 
@@ -2494,7 +2494,7 @@ msgid "Invalid payment method. Please input a new card number."
 msgstr "Ungültige Zahlungsmethode. Gib bitte eine neue Kartennummer ein."
 
 #. translators: %1: ID being fetched
-#: includes/class-wc-payments-webhook-processing-service.php:571
+#: includes/class-wc-payments-webhook-processing-service.php:569
 msgid "%1$s not found in array"
 msgstr "%1$s im Array nicht gefunden"
 
@@ -2506,9 +2506,9 @@ msgstr "Eine Rückerstattung von %1$s unter Verwendung von WooCommerce Payments 
 #. translators: %1: charge ID
 #: includes/class-wc-payments-webhook-processing-service.php:225
 #: includes/class-wc-payments-webhook-processing-service.php:301
-#: includes/class-wc-payments-webhook-processing-service.php:436
-#: includes/class-wc-payments-webhook-processing-service.php:468
-#: includes/class-wc-payments-webhook-processing-service.php:499
+#: includes/class-wc-payments-webhook-processing-service.php:434
+#: includes/class-wc-payments-webhook-processing-service.php:466
+#: includes/class-wc-payments-webhook-processing-service.php:497
 msgid "Could not find order via charge ID: %1$s"
 msgstr "Bestellung konnte über Abbuchungs-ID %1$s nicht gefunden werden"
 
