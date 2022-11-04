@@ -1444,7 +1444,6 @@ final class WFACP_admin {
 
 	public function open_admin_bar() {
 
-		
 
 		echo "<style>
 #order_data #wfacp_admin_advanced_field input[type='radio']{width: auto;float: left;margin: 0 5px 5px 0;}
@@ -1559,29 +1558,32 @@ final class WFACP_admin {
 		$heading_print = false;
 
 		foreach ( $advancedFields as $field_key => $field ) {
+			if ( empty( $field ) || ! isset( $field['is_wfacp_field'] ) || false === wc_string_to_bool( $field['is_wfacp_field'] ) ) {
+				continue;
+			}
 			$has_data  = get_post_meta( $order->get_id(), $field_key, true );
 			$field_key = 'wfacp_' . $field_key;
 
-			if ( '' != $has_data ) {
-				if ( false == $heading_print ) {
-					printf( '<div style="clear: both;"></div><div style="margin-top:15px" class="wfacp_order_backend_field_container"><h3 style="display: inline">%s</h3> <span class="dashicons dashicons-edit" onclick="wfacp_show_admin_advanced_field(this)" style="cursor: pointer"></span><fieldset id="wfacp_admin_advanced_field" disabled>', __( 'Custom Fields', 'woofunnels-aero-checkout' ) );
-					$heading_print = true;
-				}
-				if ( isset( $field['required'] ) ) {
-					unset( $field['required'] );
-				}
-				if ( $field['type'] == 'hidden' ) {
-					$field['type'] = 'text';
-				}
-				if ( $field['type'] == 'select2' ) {
-					$field['type'] = 'select';
-				}
 
-				if ( isset( $field['class'] ) ) {
-					$field['class'] = [ 'form-field', ' form-field-wide' ];
-				}
-				woocommerce_form_field( $field_key, $field, $has_data );
+			if ( false == $heading_print ) {
+				printf( '<div style="clear: both;"></div><div style="margin-top:15px" class="wfacp_order_backend_field_container"><h3 style="display: inline">%s</h3> <span class="dashicons dashicons-edit" onclick="wfacp_show_admin_advanced_field(this)" style="cursor: pointer"></span><fieldset id="wfacp_admin_advanced_field" disabled>', __( 'Custom Fields', 'woofunnels-aero-checkout' ) );
+				$heading_print = true;
 			}
+			if ( isset( $field['required'] ) ) {
+				unset( $field['required'] );
+			}
+			if ( $field['type'] == 'hidden' ) {
+				$field['type'] = 'text';
+			}
+			if ( $field['type'] == 'select2' ) {
+				$field['type'] = 'select';
+			}
+
+			if ( isset( $field['class'] ) ) {
+				$field['class'] = [ 'form-field', ' form-field-wide' ];
+			}
+			woocommerce_form_field( $field_key, $field, $has_data );
+
 		}
 		if ( true == $heading_print ) {
 			echo '</fieldset></div>';

@@ -13,8 +13,8 @@ if ( $post->post_type !== WFACP_Common::get_post_type_slug() && ! is_null( $temp
 	$checkout_post = $temp_post;
 	$post          = $temp_post;
 }
-$template      = wfacp_template();
-$template_type = $template->get_template_type();
+$wfacp_template      = wfacp_template();
+$template_type = $wfacp_template->get_template_type();
 do_action( 'wfacp_template_start', 'template-boxed', $checkout_post );
 ?>    <!DOCTYPE html>
     <html <?php language_attributes(); ?> class="no-js wfacp_html_boxed">

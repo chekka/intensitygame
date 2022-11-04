@@ -14,7 +14,9 @@ class SiteOrigin_Premium_WooCommerce_Template_Single_Price extends WP_Widget {
 	public function widget( $args, $instance ) {
 		echo $args['before_widget'];
 		if ( function_exists( 'woocommerce_template_single_price' ) ) {
+			do_action( 'siteorigin_premium_addon_wctb_single_product_price_before' );
 			woocommerce_template_single_price();
+			do_action( 'siteorigin_premium_addon_wctb_single_product_price_after' );
 		}
 		echo $args['after_widget'];
 	}

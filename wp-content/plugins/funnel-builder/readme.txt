@@ -4,7 +4,7 @@ Tags: Funnel Builder, WooCommerce, WooCommerce Checkout, Sales Funnels, One Clic
 Requires at least: 5.4.0
 Tested up to: 6.0.2
 Requires PHP: 7.0
-Stable tag: 2.6.1
+Stable tag: 2.7.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,9 +245,34 @@ And now you can enjoy a very intuitive and guided user experience to create your
 
 
 == Change log ==
+= 2.7.1 (Nov 02, 2022) =
+* Fixed: Posted data was not getting passed to custom hooks after optin form submission. (#3373)
+* Fixed: JavaScript console error on email field focus out on checkout page. (#3373)
+
+= 2.7.0 (Oct 31, 2022) =
+* Improved: Better handling for the case when funnel steps are getting deleted but still showing as steps while listing. (#3295)
+* Improved: Checkout- Compatibility with Woodmart plugin updated for mini cart. (#3282)
+* Improved: Checkout- RTL CSS improved for the advanced phone field flag. (#3225)
+* Improved: 'woocommerce_before_thankyou' hook will now execute on thankyou pages. (#3290)
+* Improved: Checkout- Advanced phone field flags 2x image is optimized for better performance. (#3284)
+* Improved: Some improvements to provide compatibility with php8.0.x. (#3273)
+* Improved: Checkbox icon font loading improved for mobile devices.(#4442)
+* Fixed: Checkout- Error caused from Mercado Pago gateway compatibility breaking stores in some cases. (#3279)
+* Fixed: Template import button was not working for some themes due to CSS conflict. (#3222)
+* Fixed: PHP Error on the checkout page for admins when the "Show Current Template" plugin is active (#3270)
+* Fixed: Checkout- Error with shoptimizer theme in checkout embed forms. (#3287)
+* Fixed: Pass current user ID as external ID to Facebook pixel event to avoid mismatch of external_id. (#1458)
+* Fixed: PHP notice coming up with perfmatter compatibility when webp-converter for media plugin is active. (#3302)
+* Fixed: Optin webhook action not getting fired in some cases. (#3313)
+* Fixed: Terms and condition error notice was not coming with some cases with multistep forms and PayPal gateway. (#3315)
+* Fixed: Global CSS not getting applied to global checkout made using block editor in some cases. (#3294)
+* Fixed: Checkout- Smart buttons color CSS is getting overridden for some gateways. (#3281) 
+* Fixed: Checkout- External Divi button Icon showing incorrectly on the place order button. (#3322) 
+* Fixed: Admin menu not showing for user roles except adminstrator. (#3307)
+
 = 2.6.1 (Oct 19, 2022) =
 * Fixed: Database table creation failing since v2.6.0. (#3256)
-* Fixed: Checkout styling broken for the oxygen builder since v2.6.0. (#3258)
+* Fixed: Checkout styling improved for the cases of shimmer animation with oxygen builder since v2.6.0. (#3258)
 
 = 2.6.0 (Oct 18, 2022) =
 * Added: Checkout- A filter to remove shimmer animation on the checkout. (#3238)

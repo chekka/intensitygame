@@ -12,8 +12,8 @@ $temp_post = WFACP_Core()->template_loader->get_checkout_post();
 if ( $post->post_type !== WFACP_Common::get_post_type_slug() && ! is_null( $temp_post ) ) {
 	$checkout_post = $temp_post;
 }
-$template      = wfacp_template();
-$template_type = $template->get_template_type();
+$wfacp_template      = wfacp_template();
+$template_type = $wfacp_template->get_template_type();
 ?>
     <!DOCTYPE html>
     <html <?php language_attributes(); ?> class="no-js wfacp_html_canvas">

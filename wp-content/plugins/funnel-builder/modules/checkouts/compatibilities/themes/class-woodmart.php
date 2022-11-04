@@ -17,6 +17,13 @@ class WFACP_Compatibility_WoodMart_Theme {
 	public function action() {
 		$this->clear_cache();
 		add_filter( 'body_class', [ $this, 'remove_class' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'dequeue_style' ], 9999999 );
+	}
+
+	public function dequeue_style() {
+		wp_deregister_style( 'wd-page-checkout' );
+		wp_dequeue_style( 'wd-page-checkout' );
+
 	}
 
 	public function clear_cache() {
@@ -70,6 +77,8 @@ class WFACP_Compatibility_WoodMart_Theme {
 		$cssHtml .= ".checkout_coupon {width: 100% !important;max-width: 100%;text-align: left;}";
 		$cssHtml .= "body td.product-remove a, body .woocommerce-remove-coupon{display: inline-block;align-items: inherit;justify-content: inherit;width: auto;height: auto;}";
 		$cssHtml .= "body td.product-remove a:before, body .woocommerce-remove-coupon:before{display:none;}";
+
+
 		$cssHtml .= "</style>";
 		echo $cssHtml;
 

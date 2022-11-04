@@ -14,7 +14,9 @@ class SiteOrigin_Premium_WooCommerce_Template_Single_Meta extends WP_Widget {
 	public function widget( $args, $instance ) {
 		echo $args['before_widget'];
 		if ( function_exists( 'woocommerce_template_single_meta' ) ) {
+			do_action( 'siteorigin_premium_addon_wctb_single_product_meta_before' );
 			woocommerce_template_single_meta();
+			do_action( 'siteorigin_premium_addon_wctb_single_product_meta_after' );
 		}
 		echo $args['after_widget'];
 	}

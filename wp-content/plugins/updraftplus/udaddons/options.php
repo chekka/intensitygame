@@ -15,6 +15,8 @@ class UpdraftPlusAddOns_Options2 {
 
 	public $mother;
 
+	private $connected = false;
+
 	// Object with at least get_option(), update_option() and addons_admin_url() methods
 	private $options;
 
@@ -85,8 +87,17 @@ class UpdraftPlusAddOns_Options2 {
 		echo '<div class="'.$class.'">'."<p>$message</p></div>";
 	}
 
+	/**
+	 * Show an administrative warning about the available updates of UpdraftPlus
+	 */
 	public function show_admin_warning_update() {
-		$this->show_admin_warning('<a id="updraftaddons_updatewarning" href="'.$this->plugin_update_url.'">'.__('An update is available for UpdraftPlus - please follow this link to get it.', 'updraftplus').'</a>');
+		global $updraftplus_addons2;
+		if ($updraftplus_addons2->connection_status()) {
+			$msg = '<a id="updraftaddons_updatewarning" href="'.$this->plugin_update_url.'">'.__('An update is available for UpdraftPlus - please follow this link to get it.', 'updraftplus').'</a>';
+		} else {
+			$msg = '<a id="updraftaddons_updatewarning" href="'.esc_url(admin_url($this->options->addons_admin_url())).'">'.__('An update is available for UpdraftPlus - please connect here to gain access to it.', 'updraftplus').'</a>';
+		}
+		$this->show_admin_warning($msg);
 	}
 
 	public function show_admin_warning_notconnected() {
@@ -233,7 +244,7 @@ class UpdraftPlusAddOns_Options2 {
 			// Not translated; it's only seen in development
 			if (false === strpos($this->mother, '//updraftplus.com')) echo ' <strong>(Updates URL: '.$this->mother.')</strong>.';
 			
-			echo ' <a href="'.UpdraftPlus::get_current_clean_url().'" onclick="jQuery(\'#updraft-navtab-addons-content .ud_connectsubmit\').click(); return false;">'.__('If you bought new add-ons, then follow this link to refresh your connection', 'updraftplus').'</a>.';
+			echo ' <a href="'.esc_url(UpdraftPlus::get_current_clean_url()).'" onclick="jQuery(\'#updraft-navtab-addons-content .ud_connectsubmit\').click(); return false;">'.__('If you bought new add-ons, then follow this link to refresh your connection', 'updraftplus').'</a>.';
 			if (!empty($options['password'])) echo ' '.__("Note that after you have claimed your add-ons, you can remove your password (but not the email address) from the settings below, without affecting this site's access to updates.", 'updraftplus');
 
 			echo '</p>';
@@ -323,7 +334,7 @@ class UpdraftPlusAddOns_Options2 {
 					var addons_written = false;
 				
 					try {
-						response = JSON.parse(resp);
+						response = ud_parse_json(resp);
 						response_code = response.hasOwnProperty('code') ? response.code : 'UNKNOWN';
 						addons_written = response.hasOwnProperty('addons_written') ? response.addons_written : false;
 					} catch (e) {
@@ -369,7 +380,7 @@ ENDHERE;
 		if (is_object($updates_available) && isset($updates_available->response) && isset($updraftplus_addons2->plug_updatechecker) && isset($updraftplus_addons2->plug_updatechecker->pluginFile) && isset($updates_available->response[$updraftplus_addons2->plug_updatechecker->pluginFile])) {
 			$file = $updraftplus_addons2->plug_updatechecker->pluginFile;
 			$this->plugin_update_url = wp_nonce_url(self_admin_url('update.php?action=upgrade-plugin&updraftplus_noautobackup=1&plugin=').$file, 'upgrade-plugin_'.$file);
-			$this->update_js = '<script>jQuery(document).ready(function() { jQuery(\'#updraftaddons_updatewarning\').html(\''.esc_js(__('An update containing your addons is available for UpdraftPlus - please follow this link to get it.', 'updraftplus')).'\') });</script>';
+			$this->update_js = '<script>jQuery(function() { jQuery(\'#updraftaddons_updatewarning\').html(\''.esc_js(__('An update containing your addons is available for UpdraftPlus - please follow this link to get it.', 'updraftplus')).'\') });</script>';
 			
 		}
 

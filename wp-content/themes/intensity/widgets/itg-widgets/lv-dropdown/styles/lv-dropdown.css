@@ -1,0 +1,48 @@
+@import url("../../../../../themes/lv-1871-new/resources/css/colors.min.css");
+@import url("../../../../../themes/lv-1871-new/resources/css/defaults.min.css");
+
+.so-widget-lv-dropdown .hidden {
+  flex: 0 0 100%;
+}
+.so-widget-lv-dropdown .outer {
+  cursor: pointer;
+}
+.so-widget-lv-dropdown .icon {
+  min-width: 52px;
+}
+.so-widget-lv-dropdown .icon img {
+  width: 52px;
+  height: 52px;
+}
+
+.so-widget-lv-dropdown .bg-white .title {
+  height: 52px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+}
+.so-widget-lv-dropdown .bg-white .title.small {
+  height: 52px;
+  font-size: 16px;
+  line-height: 19px;
+}
+.so-widget-lv-dropdown .card-body.text-small * {
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.so-widget-lv-dropdown .bg-white .title *,
+.so-widget-lv-dropdown .bg-white .card-body * {
+  color: var(--typo-darker) !important;
+}
+
+.so-widget-lv-dropdown .card-body {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+@media screen and (max-width:400px) {
+  .so-widget-lv-dropdown .bg-white .title {
+    font-size: 16px;
+  }
+}

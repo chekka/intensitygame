@@ -22,7 +22,7 @@ class WoocommerceService {
 		'address'   => array( 'value' => 'billing_address_1', 'name' => 'address', 'default' => 'no' ),
 		'city'      => array( 'value' => 'billing_city', 'name' => 'city', 'default' => 'no' ),
 		'state'     => array( 'value' => 'billing_state', 'name' => 'state', 'default' => 'no' ),
-		'telephone' => array( 'value' => 'billing_phone', 'name' => 'telephone', 'default' => 'no' ),
+		'phone' => array( 'value' => 'billing_phone', 'name' => 'phone', 'default' => 'no' ),
 		'country'   => array( 'value' => 'billing_country', 'name' => 'country', 'default' => 'no' ),
 		'company'   => array( 'value' => 'billing_company', 'name' => 'company', 'default' => 'no' ),
 		'postcode'  => array( 'value' => 'billing_postcode', 'name' => 'postcode', 'default' => 'no' )

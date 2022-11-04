@@ -54,7 +54,7 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller' ) ) {
 		 * @param $posted_data
 		 * @param $fields_settings
 		 *
-		 * @return bool
+		 * @return bool|array
 		 */
 		public function handle_actions( $posted_data, $fields_settings, $optin_action_settings ) {
 			$form_actions = WFOPP_Core()->optin_actions->get_supported_actions();

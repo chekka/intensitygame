@@ -408,6 +408,7 @@ abstract class WFACP_Template_Common {
 			'enable_phone_validation'         => wc_string_to_bool( $page_settings['enable_phone_validation'] ) ? 'yes' : 'no',
 			'intl_util_scripts'               => plugin_dir_url( WFACP_PLUGIN_FILE ) . 'assets/js/utils.js',
 			'process_order_loader_text'       => __( "Processing order", 'woocommerce' ),
+			'is_rtl'     => is_rtl(),
 
 		];
 

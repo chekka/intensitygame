@@ -2274,7 +2274,7 @@ msgstr ""
 msgid "Tabs mobile position"
 msgstr ""
 
-#: addons/plugin/tabs/tabs.php:250, addons/plugin/woocommerce-templates/woocommerce-templates.php:987, addons/plugin/woocommerce-templates/woocommerce-templates.php:1029, addons/plugin/woocommerce-templates/woocommerce-templates.php:1084
+#: addons/plugin/tabs/tabs.php:250, addons/plugin/woocommerce-templates/woocommerce-templates.php:991, addons/plugin/woocommerce-templates/woocommerce-templates.php:1033, addons/plugin/woocommerce-templates/woocommerce-templates.php:1088
 msgid "Default"
 msgstr ""
 
@@ -2486,143 +2486,143 @@ msgstr ""
 msgid "Create custom WooCommerce templates using the power of SiteOrigin Page Builder."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:174, addons/plugin/woocommerce-templates/templates/cart/wc-cart-form.php:25, addons/plugin/woocommerce-templates/templates/cart/wc-cart-form.php:69, addons/plugin/woocommerce-templates/templates/thankyou/wc-thankyou-order-details-table.php:33
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:178, addons/plugin/woocommerce-templates/templates/cart/wc-cart-form.php:25, addons/plugin/woocommerce-templates/templates/cart/wc-cart-form.php:69, addons/plugin/woocommerce-templates/templates/thankyou/wc-thankyou-order-details-table.php:33
 msgid "Product"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:178
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:182
 msgid "Product Archive"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:182
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:186
 msgid "Shop"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:186
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:190
 msgid "Cart"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:190
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:194
 msgid "Empty Cart"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:194
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:198
 msgid "Checkout"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:198, addons/plugin/woocommerce-templates/woocommerce-templates.php:216
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:202, addons/plugin/woocommerce-templates/woocommerce-templates.php:220
 msgid "Thank You"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:202
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:206
 msgid "My Account"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:249, addons/plugin/woocommerce-templates/woocommerce-templates.php:264, addons/plugin/woocommerce-templates/woocommerce-templates.php:270, addons/plugin/woocommerce-templates/woocommerce-templates.php:619
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:253, addons/plugin/woocommerce-templates/woocommerce-templates.php:268, addons/plugin/woocommerce-templates/woocommerce-templates.php:274, addons/plugin/woocommerce-templates/woocommerce-templates.php:623
 msgid "SiteOrigin WooCommerce Layout"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:318
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:322
 msgid "WooCommerce Template"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:332, addons/plugin/woocommerce-templates/woocommerce-templates.php:333, addons/plugin/woocommerce-templates/inc/admin-wc-template-builder.php:19
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:336, addons/plugin/woocommerce-templates/woocommerce-templates.php:337, addons/plugin/woocommerce-templates/inc/admin-wc-template-builder.php:19
 msgid "WooCommerce Template Builder"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:387
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:391
 msgid "Please install and activate WooCommerce before using this addon."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:393
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:397
 msgid "The SiteOrigin WooCommerce Template Builder addon isn't compatible with this version of WooCommerce. Please update to WooCommerce 3.4.0, or later, before using this addon."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:399
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:403
 msgid "Please install and activate SiteOrigin Page Builder before using this addon."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:406
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:410
 msgid "Please install and activate the SiteOrigin Widgets Bundle plugin before using this addon."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:495
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:499
 msgid "The templates to be used when viewing single product pages. Set one as the default and it will be used for all single product pages. Layouts can also be enabled for individual products by going to Products > Edit product and selecting the template from the Product template meta box dropdown."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:498
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:502
 msgid "The templates to be used for each product when viewing an archive page. Set one as the default and it will be used for the Shop page and any other product archive pages. Layouts can also be enabled for individual product archives by going to Products > Categories > Edit category and selecting the template from the Product archive template dropdown."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:501
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:505
 msgid "The template to be used when viewing the Shop page. This layout allows customization of position and size of the product loop, and placing widgets around the product loop."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:504
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:508
 msgid "The template to be used when viewing a cart which contains products."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:507
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:511
 msgid "The template to be used when viewing an empty cart."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:510
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:514
 msgid "The template to be used for the Checkout page."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:513
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:517
 msgid "The template to be used for the Thank you page which appears after an order is submitted."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:516
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:520
 msgid "The template to be used for the My account page."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:563
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:567
 msgid "Permanently delete this template?"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:886
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:890
 msgid "WooCommerce Product"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:893
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:897
 msgid "WooCommerce Product Archive"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:900
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:904
 msgid "WooCommerce Shop"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:907
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:911
 msgid "WooCommerce Cart"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:914
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:918
 msgid "WooCommerce Empty Cart"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:921
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:925
 msgid "WooCommerce Checkout"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:928
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:932
 msgid "WooCommerce Thank You"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:935
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:939
 msgid "WooCommerce My Account"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:973
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:977
 msgid "Product template"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:1026
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:1030
 msgid "Template:"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/woocommerce-templates.php:1075, addons/plugin/woocommerce-templates/woocommerce-templates.php:1103
+#: addons/plugin/woocommerce-templates/woocommerce-templates.php:1079, addons/plugin/woocommerce-templates/woocommerce-templates.php:1107
 msgid "Product Archive Template"
 msgstr ""
 
@@ -2986,27 +2986,27 @@ msgstr ""
 msgid "Display the product image gallery. Choose from several options."
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:54
+#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:56
 msgid "Slider"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:55
+#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:57
 msgid "Slider With Lightbox"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:56
+#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:58
 msgid "Slider With Zoom"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:57
+#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:59
 msgid "Slider With Lightbox and Zoom"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:63
+#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:65
 msgid "Gallery Type"
 msgstr ""
 
-#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:84
+#: addons/plugin/woocommerce-templates/templates/content-single-product/wc-show-product-images.php:86
 msgid "Enable Sale Sticker"
 msgstr ""
 

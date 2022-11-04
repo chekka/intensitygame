@@ -6,7 +6,7 @@
 class WFACP_WC_Order_Pay {
 	public function __construct() {
 		add_action( 'woocommerce_before_pay_action', [ $this, 'update_aero_id' ], 10, 1 );
-		add_action( 'wfacp_after_form', [ $this, 'update_checkout_views' ] );
+		add_action( 'before_woocommerce_pay', [ $this, 'update_checkout_views' ] );
 		add_filter( 'woocommerce_payment_successful_result', [ $this, 'update_checkout_reporting' ], 10, 2 );
 	}
 
@@ -33,10 +33,12 @@ class WFACP_WC_Order_Pay {
 	 * @return void
 	 */
 	public function update_checkout_views() {
-		$wfacp_id = WFACP_Common::get_id();
-		if ( $wfacp_id > 0 ) {
-			$str = '_wfacp_post_id=' . $wfacp_id;
-			WFACP_Core()->reporting->update_order_review( $str );
+		if ( isset( $_GET['pay_for_order'] ) && "true" === $_GET['pay_for_order'] ) {
+			$wfacp_id = WFACP_Common::get_id();
+			if ( $wfacp_id > 0 ) {
+				$str = '_wfacp_post_id=' . $wfacp_id;
+				WFACP_Core()->reporting->update_order_review( $str );
+			}
 		}
 	}
 

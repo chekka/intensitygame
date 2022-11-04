@@ -80,22 +80,27 @@ class WFACP_Blocks_Frontend_CSS {
 	 * Outputs extra css for blocks.
 	 */
 	public function frontend_inline_css() {
-		if ( function_exists( 'has_blocks' ) && has_blocks( get_the_ID() ) ) {
-			global $post;
-			if ( ! is_object( $post ) ) {
-				return;
-			}
-			if ( ! class_exists( 'WFACP_Common' ) || WFACP_Common::get_post_type_slug() !== $post->post_type ) {
-				return;
-			}
 
-			global $wp_query;
-			$post_to_pass = $post;
-			if ( isset( $wp_query->query['preview'] ) && 'true' === $wp_query->query['preview'] ) {
-				$post_to_pass = $wp_query->posts[0];
-			}
-			$this->frontend_build_css( $post_to_pass );
+
+		if ( ! function_exists( 'has_blocks' ) || ! has_blocks( WFACP_Common::get_id() ) ) {
+			return;
 		}
+		$post = WFACP_Core()->template_loader->get_checkout_post();
+
+		if ( ! is_object( $post ) ) {
+			return;
+		}
+		if ( WFACP_Common::get_post_type_slug() !== $post->post_type ) {
+			return;
+		}
+
+		global $wp_query;
+		$post_to_pass = $post;
+		if ( isset( $wp_query->query['preview'] ) && 'true' === $wp_query->query['preview'] ) {
+			$post_to_pass = $wp_query->posts[0];
+		}
+		$this->frontend_build_css( $post_to_pass );
+
 	}
 
 	/**
@@ -141,6 +146,12 @@ class WFACP_Blocks_Frontend_CSS {
 	 * @param $post_object object of WP_Post.
 	 */
 	public function frontend_build_css( $post_object ) {
+
+		$post = WFACP_Core()->template_loader->get_checkout_post();
+		if ( ! is_null( $post ) ) {
+			$post_object = $post;
+		}
+
 		if ( ! is_object( $post_object ) ) {
 			return;
 		}
@@ -303,16 +314,16 @@ class WFACP_Blocks_Frontend_CSS {
 					'unit'  => '%'
 				]
 			],
-			'buttonPadding' => [
-				'desktop'   => [
-					'top'  	 => 15,
+			'buttonPadding'          => [
+				'desktop' => [
+					'top'    => 15,
 					'right'  => 25,
 					'bottom' => 15,
 					'left'   => 25,
 					'unit'   => 'px',
 				],
-				'mobile'   => [
-					'top'  	 => 10,
+				'mobile'  => [
+					'top'    => 10,
 					'right'  => 20,
 					'bottom' => 10,
 					'left'   => 20,
@@ -596,6 +607,7 @@ class WFACP_Blocks_Frontend_CSS {
 			{{WRAPPER}} #wfacp-e-form  button[type=submit],
 			{{WRAPPER}} #wfacp-e-form  button[type=button],
 			{{WRAPPER}} #wfacp-e-form .wfacp-coupon-section .wfacp-coupon-page .wfacp-coupon-field-btn,
+			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp_payment #ppcp-hosted-fields .button,
 			.wfacp_mini_cart_start_h .wfacp-coupon-section .wfacp-coupon-page .wfacp-coupon-btn', $unique_class ) );
 			$css->add_property( 'background-color', $this->has_attr( $attr, 'formPrimaryColor', $screen ) ? $this->has_attr( $attr, 'formPrimaryColor', $screen ) : '' );
 
@@ -1159,19 +1171,20 @@ class WFACP_Blocks_Frontend_CSS {
 
 			/* Button Styling */
 			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-next-btn-wrap button,
-			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce #payment button#place_order, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-order-place-btn-wrap button#place_order', $unique_class ) );
+			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce #payment button#place_order, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-order-place-btn-wrap button#place_order,
+			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp_payment #ppcp-hosted-fields .button', $unique_class ) );
 			$css->add_property( 'width', $this->has_attr( $attr, 'buttonWidth', $screen ), true );
 			$css->add_property( 'border', $this->has_attr( $attr, 'buttonBorder', $screen ) );
 			$css->add_property( 'margin', $this->has_attr( $attr, 'buttonMargin', $screen ) );
 			$css->add_property( 'padding', $this->has_attr( $attr, 'buttonPadding', $screen ) );
 
-			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .woocommerce-checkout .wfacp-order-place-btn-wrap,
-			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .woocommerce-checkout .wfacp-next-btn-wrap', $unique_class ) );
+			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .woocommerce-checkout .wfacp-order-place-btn-wrap, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .woocommerce-checkout .wfacp-next-btn-wrap, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp_payment #ppcp-hosted-fields .button', $unique_class ) );
 			$css->add_property( 'text-align', isset( $this->has_attr( $attr, 'buttonTextStyle', $screen )['align'] ) ? $this->has_attr( $attr, 'buttonTextStyle', $screen )['align'] : '' );
 
 
 			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce #payment button#place_order,
-			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .woocommerce-checkout button.button.button-primary.wfacp_next_page_button, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-order-place-btn-wrap button#place_order, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .woocommerce-checkout button.button.button-primary.wfacp_next_page_button', $unique_class ) );
+			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce  button#place_order,
+			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .woocommerce-checkout button.button.button-primary.wfacp_next_page_button, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp_payment #ppcp-hosted-fields .button ', $unique_class ) );
 
 			$css->add_property( 'color', $this->has_attr( $attr, 'buttonColor', $screen ) ? $this->has_attr( $attr, 'buttonColor', $screen ) . ' !important' : '' );
 			$css->add_property( 'font', $this->has_attr( $attr, 'buttonFont', $screen ) );
@@ -1179,16 +1192,11 @@ class WFACP_Blocks_Frontend_CSS {
 			$css->add_property( 'line-height', $this->has_attr( $attr, 'buttonLineHeight', $screen ), true );
 			$css->add_property( 'letter-spacing', $this->has_attr( $attr, 'buttonLetterSpacing', $screen ), true );
 
-			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-next-btn-wrap button,
-			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce #payment button#place_order,
-			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-order-place-btn-wrap button#place_order, #wfacp_qr_model_wrap .wfacp_qr_wrap .wfacp_qv-summary .button', $unique_class ) );
+			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-next-btn-wrap button, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce #payment button#place_order, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce button#place_order, #wfacp_qr_model_wrap .wfacp_qr_wrap .wfacp_qv-summary .button, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp_payment #ppcp-hosted-fields .button', $unique_class ) );
 			$css->add_property( 'color', $this->has_attr( $attr, 'buttonColor', $screen ) ? $this->has_attr( $attr, 'buttonColor', $screen ) . ' !important' : '' );
 			$css->add_property( 'background-color', $this->has_attr( $attr, 'buttonBackground', $screen ) ? $this->has_attr( $attr, 'buttonBackground', $screen ) . ' !important' : '' );
 
-			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-next-btn-wrap button:hover,
-			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce #payment button#place_order:hover,
-			{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-order-place-btn-wrap button#place_order:hover,
-			#wfacp_qr_model_wrap .wfacp_qr_wrap .wfacp_qv-summary .button:hover', $unique_class ) );
+			$css->set_selector( $this->add_wrapper( '{{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp-next-btn-wrap button:hover, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce #payment button#place_order:hover, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce button#place_order:hover, #wfacp_qr_model_wrap .wfacp_qr_wrap .wfacp_qv-summary .button:hover, {{WRAPPER}} #wfacp-e-form .wfacp_main_form.woocommerce .wfacp_payment #ppcp-hosted-fields .button:hover', $unique_class ) );
 			$css->add_property( 'color', $this->has_attr( $attr, 'buttonColorHover', $screen ) ? $this->has_attr( $attr, 'buttonColorHover', $screen ) . ' !important' : '' );
 			$css->add_property( 'background-color', $this->has_attr( $attr, 'buttonBackgroundHover', $screen ) ? $this->has_attr( $attr, 'buttonBackgroundHover', $screen ) . ' !important' : '' );
 

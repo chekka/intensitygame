@@ -1,0 +1,131 @@
+#wpcontent,
+#wpfooter {
+  margin-left: 250px;
+}
+
+#adminmenu li {
+  white-space: nowrap;
+}
+
+#adminmenu li.menu-top:hover {
+  box-shadow: inset 0 12px 0 0 #363b3f;
+}
+
+/* Wider Admin Menu */
+#adminmenu,
+#adminmenu .wp-submenu,
+#adminmenuback,
+#adminmenuwrap {
+  width: 250px;
+}
+
+#adminmenu .wp-submenu {
+  left: 250px;
+}
+
+#adminmenu .wp-not-current-submenu .wp-submenu,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu {
+  min-width: 250px;
+}
+
+/* Admin Menu Order */
+#adminmenu {
+  display: flex;
+  flex-direction: column;
+}
+
+#adminmenu li {
+  order: 100;
+}
+
+#adminmenu #menu-dashboard {
+  order: 0;
+}
+
+#adminmenu #menu-pages {
+  order: 1;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #444;
+}
+
+#adminmenu #menu-posts-initiativen {
+  order: 2;
+}
+
+#adminmenu #menu-media {
+  order: 3;
+}
+
+#adminmenu #menu-posts {
+  order: 4;
+}
+
+#adminmenu #menu-posts-jobs {
+  order: 4;
+}
+
+#adminmenu #menu-comments {
+  order: 5;
+}
+
+#adminmenu #menu-appearance {
+  order: 5;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #444;
+}
+
+#adminmenu #menu-plugins {
+  order: 6;
+}
+
+#adminmenu #menu-users {
+  order: 7;
+}
+
+#adminmenu #menu-tools {
+  order: 8;
+}
+
+#adminmenu #menu-settings {
+  order: 9;
+}
+
+#adminmenu #toplevel_page_siteorigin {
+  order: 10;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #444;
+}
+
+#adminmenu #toplevel_page_make-paths-relative-settings {
+  order: 11;
+}
+
+#adminmenu #menu-posts-popup {
+  order: 12;
+}
+
+#adminmenu #toplevel_page_complianz {
+  order: 13;
+}
+
+#adminmenu #toplevel_page_review-widgets-for-opentable-settings {
+  order: 14;
+}
+
+#adminmenu #toplevel_page_make-paths-relative-settings ul li:last-child {
+  display: none;
+}
+
+#adminmenu #collapse-menu {
+  position: fixed;
+  bottom: 20px;
+  width: 300px;
+}
+
+#adminmenu li.wp-menu-separator {
+  height: 0;
+  margin: 0;
+}

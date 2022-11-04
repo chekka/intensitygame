@@ -1,0 +1,67 @@
+@import url("../../../../../themes/lv-1871-new/resources/css/colors.css");
+@import url("../../../../../themes/lv-1871-new/resources/css/defaults.css");
+
+.so-widget-lv-button .hidden {
+  flex: 0 0 100%;
+}
+.so-widget-lv-button .outer {
+  cursor: pointer;
+}
+.so-widget-lv-button .icon img {
+  width: 52px;
+  height: 52px;
+}
+
+.so-widget-lv-button .bg-white .title {
+  height: 52px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+}
+.so-widget-lv-button .bg-white .title.small {
+  height: 52px;
+  font-size: 16px;
+  line-height: 19px;
+}
+.so-widget-lv-button .card-body.text-small * {
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.so-widget-lv-button .bg-white .title *,
+.so-widget-lv-button .bg-white .card-body * {
+  color: var(--typo-darker) !important;
+}
+
+.so-widget-lv-button .card-body {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+.so-widget-lv-button .btn-center {
+  margin: auto;
+}
+.so-widget-lv-button .outl-none {
+  border-color: transparent !important;
+}
+.so-widget-lv-button .txt-candy .button-link-text {
+  color: var(--candy) !important;
+}
+.so-widget-lv-button .txt-mint .button-link-text {
+  color: var(--mint) !important;
+}
+.so-widget-lv-button .txt-space .button-link-text {
+  color: var(--space) !important;
+}
+.so-widget-lv-button .txt-sky .button-link-text {
+  color: var(--sky) !important;
+}
+.so-widget-lv-button .txt-sun .button-link-text {
+  color: var(--sun) !important;
+}
+.so-widget-lv-button .txt-black .button-link-text {
+  color: #000 !important;
+}
+.so-widget-lv-button .txt-white .button-link-text {
+  color: #fff !important;
+}

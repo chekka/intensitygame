@@ -351,7 +351,7 @@
                 flag_w = parseInt(flag_w) + 12;
 
                 if ($('.wfacp-top').length == 0) {
-                    if ($('body').hasClass('rtl')) {
+                    if (true === wfacp_frontend.is_rtl || "1" === wfacp_frontend.is_rtl) {
                         $(intl.a).parents('.wfacp-form-control-wrapper').find('.wfacp-form-control-label').css('right', flag_w + 7);
 
                     } else {
@@ -360,7 +360,7 @@
                     }
                 }
 
-                if ($('body').hasClass('rtl')) {
+                if (true === wfacp_frontend.is_rtl || "1" === wfacp_frontend.is_rtl) {
                     $(intl.a).css('cssText', 'padding-right: ' + flag_w + 'px !important');
                 } else {
                     $(intl.a).css('cssText', 'padding-left: ' + flag_w + 'px !important');

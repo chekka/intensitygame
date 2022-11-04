@@ -1441,8 +1441,8 @@ class El_WFACP_Form_Widget extends WFACP_Elementor_HTML_BLOCK {
 		$primary_color = [
 			'{{WRAPPER}} #wfacp-e-form  #payment li.wc_payment_method input.input-radio:checked::before',
 			'{{WRAPPER}} #wfacp-e-form  #payment.wc_payment_method input[type=radio]:checked:before',
-			'{{WRAPPER}} #wfacp-e-form  button[type=submit]',
-			'{{WRAPPER}} #wfacp-e-form  button[type=button]',
+			'{{WRAPPER}} #wfacp-e-form  button[type=submit]:not(.white):not(.black)',
+			'{{WRAPPER}} #wfacp-e-form  button[type=button]:not(.white):not(.black)',
 			'{{WRAPPER}} #wfacp-e-form .wfacp-coupon-section .wfacp-coupon-page .wfacp-coupon-field-btn',
 			'{{WRAPPER}} #wfacp-e-form input[type=checkbox]:checked',
 			'{{WRAPPER}} #wfacp-e-form #payment input[type=checkbox]:checked',

@@ -9,11 +9,12 @@ $instance          = wfacp_template();
 $is_customizer     = WFACP_Common::is_customizer();
 $is_wfacp_checkout = WFACP_Core()->template_loader->is_valid_state_for_data_setup();
 $checkout          = WC()->checkout();
+$wp_head_included  = did_action( 'wp_head' ) > 0 ? true : false;
 if ( true == $is_customizer ) {
 	$exclude_header_footer = false;
 }
 // customizer header
-if ( ( true == $is_customizer || true == $is_wfacp_checkout ) && apply_filters( 'wfacp_embed_form_allow_header', true, $instance ) && false == $exclude_header_footer ) {
+if ( false == $wp_head_included && ( true == $is_customizer || true == $is_wfacp_checkout ) && apply_filters( 'wfacp_embed_form_allow_header', true, $instance ) && false == $exclude_header_footer ) {
 	include( $instance->wfacp_get_header() );
 }
 do_action( 'wfacpef_before_form' );
@@ -107,7 +108,7 @@ do_action( 'wfacp_header_print_in_head' );
     </div>
 </div>
 <?php
-if ( ( true == $is_customizer || true == $is_wfacp_checkout ) && false == $exclude_header_footer ) {
+if ( false == $wp_head_included && ( true == $is_customizer || true == $is_wfacp_checkout ) && false == $exclude_header_footer ) {
 	include( $instance->wfacp_get_footer() );
 }
 ?>

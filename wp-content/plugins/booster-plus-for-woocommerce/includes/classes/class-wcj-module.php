@@ -2,7 +2,7 @@
 /**
  * Booster for WooCommerce Module
  *
- * @version 5.5.6
+ * @version 5.6.5
  * @since   2.2.0
  * @author  Pluggabl LLC.
  * @todo    [dev] maybe should be `abstract` ?
@@ -437,29 +437,30 @@ class WCJ_Module {
 		echo '<div class="error"><p><div class="message">' . $this->get_the_notice() . '</div></p></div>';
 	}
 
-	/**
-	 * reset_settings.
-	 *
-	 * @version 3.7.0
-	 * @since   2.4.0
-	 * @todo    (maybe) always `delete_option()` (instead of `update_option()`)
-	 */
-	function reset_settings() {
-		if ( isset( $_GET['wcj_reset_settings'] ) && $this->id === $_GET['wcj_reset_settings'] && wcj_is_user_role( 'administrator' ) && ! isset( $_POST['save'] ) ) {
-			foreach ( $this->get_settings() as $settings ) {
-				if ( false !== strpos( $settings['id'], '[' ) ) {
-					$id = explode( '[', $settings['id'] );
-					$id = $id[0];
-					delete_option( $id );
-				} else {
-					$default_value = isset( $settings['default'] ) ? $settings['default'] : '';
-					update_option( $settings['id'], $default_value );
+		/**
+		 * Reset_settings.
+		 *
+		 * @version 5.6.5
+		 * @since   2.4.0
+		 * @todo    (maybe) always `delete_option()` (instead of `update_option()`)
+		 */
+		public function reset_settings() {
+			$wpnonce = isset( $_REQUEST[ 'wcj_reset_settings-' . $this->id . '-nonce' ] ) ? wp_verify_nonce( sanitize_key( $_REQUEST[ 'wcj_reset_settings-' . $this->id . '-nonce' ] ), 'wcj_reset_settings' ) : false;
+			if ( $wpnonce && isset( $_GET['wcj_reset_settings'] ) && $this->id === $_GET['wcj_reset_settings'] && wcj_is_user_role( 'administrator' ) && ! isset( $_POST['save'] ) ) {
+				foreach ( $this->get_settings() as $settings ) {
+					if ( false !== strpos( $settings['id'], '[' ) ) {
+						$id = explode( '[', $settings['id'] );
+						$id = $id[0];
+						delete_option( $id );
+					} else {
+						$default_value = isset( $settings['default'] ) ? $settings['default'] : '';
+						update_option( $settings['id'], $default_value );
+					}
 				}
+				wp_safe_redirect( remove_query_arg( array( 'wcj_reset_settings', 'wcj_reset_settings-' . $this->id . '-nonce' ) ) );
+				exit();
 			}
-			wp_safe_redirect( remove_query_arg( 'wcj_reset_settings' ) );
-			exit();
 		}
-	}
 
 	/**
 	 * add_standard_settings.
@@ -869,13 +870,14 @@ class WCJ_Module {
 	}
 
 	/**
-	 * add_reset_settings_button.
+	 * Add_reset_settings_button.
 	 *
-	 * @version 2.5.9
+	 * @version 5.6.5
 	 * @since   2.4.0
+	 * @param Array $settings Get settings.
 	 */
-	function add_reset_settings_button( $settings ) {
-		$reset_button_style = "background: red; border-color: red; box-shadow: 0 1px 0 red; text-shadow: 0 -1px 1px #a00,1px 0 1px #a00,0 1px 1px #a00,-1px 0 1px #a00;";
+	public function add_reset_settings_button( $settings ) {
+		$reset_button_style     = 'background: red; border-color: red; box-shadow: 0 1px 0 red; text-shadow: 0 -1px 1px #a00,1px 0 1px #a00,0 1px 1px #a00,-1px 0 1px #a00;';
 		$reset_settings_setting = array(
 			array(
 				'title' => __( 'Reset Settings', 'woocommerce-jetpack' ),
@@ -889,7 +891,12 @@ class WCJ_Module {
 				'id'       => 'wcj_' . $this->id . '_reset_settings',
 				'type'     => 'custom_link',
 				'link'     => '<a onclick="return confirm(\'' . __( 'Are you sure?', 'woocommerce-jetpack' ) . '\')" class="button-primary" style="' .
-					$reset_button_style . '" href="' . add_query_arg( 'wcj_reset_settings', $this->id ) . '">' . __( 'Reset settings', 'woocommerce-jetpack' ) . '</a>',
+					$reset_button_style . '" href="' . add_query_arg(
+					array(
+						'wcj_reset_settings' => $this->id,
+						'wcj_reset_settings-' . $this->id . '-nonce' => wp_create_nonce( 'wcj_reset_settings' ),
+					)
+				) . '">' . __( 'Reset settings', 'woocommerce-jetpack' ) . '</a>',
 			),
 			array(
 				'type' => 'sectionend',

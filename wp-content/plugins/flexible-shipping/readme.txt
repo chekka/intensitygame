@@ -4,7 +4,7 @@ Donate link: https://octol.io/fs-repo-up
 Tags: table rate, table rate shipping, conditional shipping, free shipping, woocommerce shipping, woocommerce table rate shipping, cart based shipping, weight based shipping, totals based shipping, order based shipping, advanced shipping
 Requires at least: 5.7
 Tested up to: 6.1
-Stable tag: 4.16.0
+Stable tag: 4.16.1
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -221,6 +221,9 @@ We provide a limited support for the free version of our Flexible Shipping plugi
 If you are upgrading from the old Flexible Shipping version (1.3.2, woo-flexible-shipping) make sure to completely delete the old version first. If you install the new version without deleting the old one it may break your WordPress installation.
 
 == Changelog ==
+
+= 4.16.1 - 2022-10-27 =
+* Fixed Flexible Shipping Info page
 
 = 4.16.0 - 2022-10-20 =
 * Added support for WooCommerce 7.1

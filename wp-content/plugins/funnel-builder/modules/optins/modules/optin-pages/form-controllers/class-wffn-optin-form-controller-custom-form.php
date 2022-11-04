@@ -168,11 +168,11 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 			do_action( 'wfopp_output_form_before', $optinPageId, $optin_settings, $form_mode, $customizations, $class, $optin_layout );
 			echo $this->add_recaptcha_script(); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
-			<div class="bwf_clear"></div>
-			<div class="wffn-optin-form bwfac_forms_outer <?php echo esc_attr( $class ); ?>" data-field-size="<?php echo esc_attr( $field_size ) ?>">
+            <div class="bwf_clear"></div>
+            <div class="wffn-optin-form bwfac_forms_outer <?php echo esc_attr( $class ); ?>" data-field-size="<?php echo esc_attr( $field_size ) ?>">
 				<?php do_action( 'wfopp_output_form_tag_before', $optinPageId, $optin_settings, $form_mode, $customizations, $class, $optin_layout ); ?>
 
-				<form class="wffn-custom-optin-from" method="post">
+                <form class="wffn-custom-optin-from" method="post">
 					<?php
 					foreach ( $optin_layout as $optin_step => $fields ) {
 						if ( count( $fields ) === 0 ) {
@@ -180,9 +180,9 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 						}
 						?>
 
-						<div class="wfop_section <?php echo esc_attr( $optin_step ); ?>">
+                        <div class="wfop_section <?php echo esc_attr( $optin_step ); ?>">
 							<?php
-							$optin_form_fields = apply_filters('wffn_custom_integration_field_merge',$fields, $optinPageId);
+							$optin_form_fields = apply_filters( 'wffn_custom_integration_field_merge', $fields, $optinPageId );
 
 							foreach ( $optin_form_fields as $fieldData ) {
 								$fieldData['hash_key'] = apply_filters( 'wffn_optin_advanced_field_name', WFFN_Common::generate_hash_key(), $fields );
@@ -193,25 +193,25 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 									$field_object->get_field_output( $fieldData );
 								}
 							} ?>
-						</div>
+                        </div>
 						<?php
 
 					}
 					$is_preview = wffn_string_to_bool( filter_input( INPUT_GET, 'preview' ) ); ?>
-					<div class="bwfac_form_sec submit_button">
-						<input type="hidden" value="<?php echo esc_attr( is_admin() ) ?>" name="optin_is_admin">
-						<input type="hidden" value="<?php echo esc_attr( wp_doing_ajax() ) ?>" name="optin_is_ajax">
-						<input type="hidden" value="<?php echo esc_attr( $is_preview ) ?>" name="optin_is_preview">
-						<input type="hidden" value="<?php echo esc_attr( $optinPageId ) ?>" name="optin_page_id">
-						<input type="hidden" value="<?php echo esc_attr( $optin_settings['formBuilder'] ) ?>" name="formBuilder">
+                    <div class="bwfac_form_sec submit_button">
+                        <input type="hidden" value="<?php echo esc_attr( is_admin() ) ?>" name="optin_is_admin">
+                        <input type="hidden" value="<?php echo esc_attr( wp_doing_ajax() ) ?>" name="optin_is_ajax">
+                        <input type="hidden" value="<?php echo esc_attr( $is_preview ) ?>" name="optin_is_preview">
+                        <input type="hidden" value="<?php echo esc_attr( $optinPageId ) ?>" name="optin_page_id">
+                        <input type="hidden" value="<?php echo esc_attr( $optin_settings['formBuilder'] ) ?>" name="formBuilder">
 						<?php $this->wffn_get_button_html( $button_args ); ?>
-					</div>
+                    </div>
 					<?php echo $this->add_recaptcha_field();//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				</form>
+                </form>
 				<?php do_action( 'wfopp_output_form_tag_after', $optinPageId, $optin_settings, $form_mode, $customizations, $class, $optin_layout ); ?>
 
 
-			</div>
+            </div>
 			<?php
 			do_action( 'wfopp_output_form_after', $optinPageId, $optin_settings, $form_mode, $customizations, $class, $optin_layout );
 
@@ -244,8 +244,8 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 			if ( ! WFOPP_Core()->optin_pages->form_builder->is_preview && $db_options['op_recaptcha'] && $db_options['op_recaptcha'] === 'true' ) {
 
 				?>
-				<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback" async defer></script> <?php //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
-				<script>
+                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback" async defer></script> <?php //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript ?>
+                <script>
                     var onloadCallback = function () {
                         grecaptcha.execute();
                     };
@@ -253,7 +253,7 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
                     function wffn_captchaResponse(response) {
                         document.getElementById('wffn-captcha-response').value = response;
                     }
-				</script>
+                </script>
 
 				<?php
 			}
@@ -288,9 +288,9 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 			}
 
 
-			$url             = empty( $url_from_filter ) ? site_url() : $url_from_filter;
+			$url = empty( $url_from_filter ) ? site_url() : $url_from_filter;
 
-			return WFFN_Core()->data->maybe_add_funnel_session_param($url );
+			return WFFN_Core()->data->maybe_add_funnel_session_param( $url );
 
 		}
 
@@ -302,7 +302,7 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 			$posted_data   = $this->get_posted_data( $optin_page_id );
 			$response      = $this->wffn_recaptcha_response( $posted_data );
 
-			$result        = [];
+			$result = [];
 			if ( $response['success'] ) {
 				if ( isset( $posted_data['wffn-captcha-response'] ) ) {
 					unset( $posted_data['wffn-captcha-response'] );
@@ -314,8 +314,10 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 				$optin_actions_settings = WFOPP_Core()->optin_actions->get_optin_action_settings( $optin_page_id );
 				$result['posted_data']  = $posted_data;
 				try {
-					$result['posted_data'] = $this->handle_actions( $posted_data, $field_settings, $optin_actions_settings );
-
+					$posted_data_after_action = $this->handle_actions( $result['posted_data'], $field_settings, $optin_actions_settings );
+					if ( ! empty( $posted_data_after_action ) && count( $posted_data_after_action ) > 0 ) {
+						$result['posted_data'] = $posted_data_after_action;
+					}
 				} catch ( Exception $e ) {
 					WFFN_Core()->logger->log( "Exception occured during form submission" . print_r( $e, true ) );  //phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 
@@ -339,7 +341,7 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 			$posted          = [];
 			$get_fields      = WFOPP_Core()->optin_pages->form_builder->get_form_fields( $optin_page_id );
 
-            $optin_form_fields = apply_filters('wffn_custom_integration_field_merge',$get_fields, $optin_page_id);
+			$optin_form_fields = apply_filters( 'wffn_custom_integration_field_merge', $get_fields, $optin_page_id );
 
 			foreach ( $optin_form_fields as $field ) {
 				$get_field_object = WFOPP_Core()->form_fields->get_integration_object( $field['type'] );
@@ -353,7 +355,8 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 				$posted['wffn-captcha-response'] = wffn_clean( $raw_posted_data['wffn-captcha-response'] );
 			}
 			$posted['optin_page_id'] = $optin_page_id;
-			$posted = apply_filters('wffn_optin_posted_data', $posted, $raw_posted_data);
+			$posted                  = apply_filters( 'wffn_optin_posted_data', $posted, $raw_posted_data );
+
 			return $posted;
 		}
 
@@ -363,13 +366,13 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 		 */
 		public function wffn_get_button_html( $button_args ) {
 			$args = wp_parse_args( $button_args, $this->get_default_button_args() ); ?>
-			<div class="<?php echo esc_attr( $args['wrapper_class'] ) ?>" id="<?php echo esc_attr( $args['wrapper_id'] ) ?>">
+            <div class="<?php echo esc_attr( $args['wrapper_class'] ) ?>" id="<?php echo esc_attr( $args['wrapper_id'] ) ?>">
 				<?php if ( 'button' === $args['type'] ){ ?>
-				<button class="<?php echo esc_attr( $args['button_class'] ) ?>" data-subitting-text="<?php echo esc_attr( $args['submitting_text'] ) ?>" type="submit" id="<?php echo esc_attr( $args['button_id'] ) ?>" data-size="<?php echo esc_attr( $args['data-size'] ) ?>">
+                <button class="<?php echo esc_attr( $args['button_class'] ) ?>" data-subitting-text="<?php echo esc_attr( $args['submitting_text'] ) ?>" type="submit" id="<?php echo esc_attr( $args['button_id'] ) ?>" data-size="<?php echo esc_attr( $args['data-size'] ) ?>">
 					<?php } else{ ?>
-					<a href="<?php echo esc_url( $args['link'] ) ?>">
+                    <a href="<?php echo esc_url( $args['link'] ) ?>">
 						<?php } ?>
-						<span class="<?php echo esc_attr( $args['text_wrapper'] ) ?>">
+                        <span class="<?php echo esc_attr( $args['text_wrapper'] ) ?>">
 							<?php if ( $args['show_icon'] ) {
 
 								if ( isset( $args['icon_html'] ) && ! empty( $args['icon_html'] ) ) {
@@ -383,14 +386,14 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 							<span class="<?php echo esc_attr( $args['title_class'] ) ?>"><?php echo esc_attr( $args['title'] ); ?></span>
 						</span>
 						<?php if ( ! empty( $args['subtitle'] ) ) { ?>
-							<span class="<?php echo esc_attr( $args['subtitle_class'] ) ?>"><?php echo esc_attr( $args['subtitle'] ); ?></span>
+                            <span class="<?php echo esc_attr( $args['subtitle_class'] ) ?>"><?php echo esc_attr( $args['subtitle'] ); ?></span>
 						<?php } ?>
 						<?php if ( 'button' === $args['type'] ){ ?>
-				</button>
+                </button>
 			<?php } else { ?>
-				</a>
+                </a>
 			<?php } ?>
-			</div>
+            </div>
 			<?php
 		}
 
@@ -421,11 +424,11 @@ if ( ! class_exists( 'WFFN_Optin_Form_Controller_Custom_Form' ) ) {
 		 * @param $args
 		 */
 		public function maybe_get_icon_html( $args ) { ?>
-			<span class="<?php echo esc_attr( $args['icon_container_class'] ) . ' ' . esc_attr( $args['icon_position'] ); ?>">
+            <span class="<?php echo esc_attr( $args['icon_container_class'] ) . ' ' . esc_attr( $args['icon_position'] ); ?>">
 				<?php if ( class_exists( '\Elementor\Icons_Manager' ) ) {
 					\Elementor\Icons_Manager::render_icon( $args['icon_class'], [ 'aria-hidden' => 'true' ] );
 				} else { ?>
-					<i aria-hidden="true" class="far fa-bell"></i>
+                    <i aria-hidden="true" class="far fa-bell"></i>
 				<?php } ?>
 			</span>
 

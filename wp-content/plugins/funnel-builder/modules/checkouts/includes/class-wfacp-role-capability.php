@@ -42,15 +42,44 @@ if ( ! class_exists( 'WFACP_Role_Capability' ) ) {
 				return false;
 			}
 
-			$config = apply_filters( 'wfacp_user_access_capabilities', [
-				'administrator' => array(
-					'menu'      => array( 'read', 'write' ),
-					'checkout'  => array( 'read', 'write' ),
-				)
-			] );
+			/**
+			 * full access for administrator user
+			 */
+			if ( current_user_can( 'administrator' ) ) {
+				return 'administrator';
+			}
+
+			global $wp_roles;
+
+			$all_roles   = $wp_roles->roles;
+			$funnel_user = array();
+
+			/**
+			 * Set default user role for full access
+			 */
+
+			if ( is_array( $all_roles ) && count( $all_roles ) > 0 ) {
+				foreach ( $all_roles as $role_name => $all_role ) {
+
+					/**
+					 * manage_woocommerce user have full access permission
+					 */
+					if ( isset( $all_role['capabilities'] ) && isset( $all_role['capabilities']['manage_woocommerce'] ) && true === $all_role['capabilities']['manage_woocommerce'] ) {
+						$funnel_user[ $role_name ] = array(
+							'menu'     => array( 'read', 'write' ),
+							'checkout' => array( 'read', 'write' ),
+						);
+					}
+				}
+			}
+
+			/**
+			 * Set user role capabilities for full access full
+			 */
+			$config = apply_filters( 'wfacp_user_access_capabilities', $funnel_user, $all_roles );
 
 			$current_user_roles = $current_user->roles;
-			if ( is_array( $current_user_roles ) ) {
+			if ( is_array( $current_user_roles ) && count( $current_user_roles ) > 0 ) {
 				foreach ( $current_user_roles as $role ) {
 					if ( isset( $config[ $role ] ) && isset( $config[ $role ][ $cap ] ) && in_array( $access, $config[ $role ][ $cap ], true ) ) {
 						return $role;

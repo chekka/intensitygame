@@ -78,7 +78,11 @@ abstract class WFACP_Divi_Template extends WFACP_Template_Common {
 
 	public function enqueue_scripts() {
 
-		wp_enqueue_style( 'wfacp-form', WFACP_Core()->url( '/builder/divi/css/divi-form.css' ) );
+		wp_enqueue_style( 'wfacp-divi-form', WFACP_Core()->url( '/builder/divi/css/divi-form.css' ) );
+		if ( is_rtl() ) {
+			wp_enqueue_style( 'wfacp-divi-form-rtl', WFACP_Core()->url( '/builder/divi/css/divi-form-rtl.css' ) );
+
+		}
 	}
 
 	public function form_step_count( $step_count ) {
@@ -1093,7 +1097,7 @@ abstract class WFACP_Divi_Template extends WFACP_Template_Common {
 			if ( $form_step == 'place_order' ) {
 				echo "<style>";
 				echo '#wfacp-e-form .' . $current . ' #place_order:' . $content1 . "{top:3px;}";
-				echo '#wfacp-e-form .' . $current . ' #place_order:' . $content . "{content:'$button_subheading'; display: inline-block !important;position: relative;}";
+				echo '#wfacp-e-form .' . $current . ' #place_order:' . $content . "{content:'$button_subheading' !important; display: inline-block !important;position: relative;}";
 				echo '#wfacp-e-form .' . $current . ' button#place_order' . "{display:inline-block;}";
 				echo '#wfacp-e-form .' . $current . ' #place_order:' . $content . "{display: block !important;}";
 				echo "</style>";
@@ -1101,7 +1105,7 @@ abstract class WFACP_Divi_Template extends WFACP_Template_Common {
 			} else {
 				echo "<style>";
 				echo '#wfacp-e-form .' . $current . ' .wfacp-next-btn-wrap button:' . $content1 . "{top:3px;}";
-				echo '#wfacp-e-form .' . $current . ' .wfacp-next-btn-wrap button:' . $content . "{content:'$button_subheading';  display: inline-block !important;position: relative;}";
+				echo '#wfacp-e-form .' . $current . ' .wfacp-next-btn-wrap button:' . $content . "{content:'$button_subheading' !important;  display: inline-block !important;position: relative;}";
 				echo '#wfacp-e-form .' . $current . ' .wfacp-next-btn-wrap button' . "{display:inline-block;}";
 				echo '#wfacp-e-form .' . $current . ' .wfacp-next-btn-wrap button:' . $content . "{display: block !important;}";
 				echo "</style>";

@@ -49,36 +49,23 @@ if ( ! class_exists( 'WFFN_Optin_Action_Webhook' ) ) {
 
 			$post_fields = $posted_data;
 
-			// Use Optin Id if found in posted_data
-			if ( isset( $post_fields['optin_page_id'] ) || $post_fields['page'] ) {
-				$optin_page_id = isset( $post_fields['optin_page_id'] ) ? $post_fields['page'] : (int) filter_var( $post_fields['page'], FILTER_SANITIZE_NUMBER_INT );
-			}
 
-			/** Optin id found */
-			if ( isset( $post_fields['optin_page_id'] ) || $optin_page_id > 0 ) {
+			if ( isset( $optin_action_settings['op_webhook_enable'] ) && wffn_string_to_bool( $optin_action_settings['op_webhook_enable'] ) === true && ! empty( $optin_action_settings['op_webhook_url'] ) ) {
 
-				if ( isset( $optin_action_settings['op_webhook_enable'] ) && wffn_string_to_bool( $optin_action_settings['op_webhook_enable'] ) === true && ! empty( $optin_action_settings['op_webhook_url'] ) ) {
+				$op_webhook_url = urldecode( $optin_action_settings['op_webhook_url'] );
 
-					$op_webhook_url = urldecode( $optin_action_settings['op_webhook_url'] );
+				$optin_webhook_request = wp_remote_post( $op_webhook_url, array( 'body' => apply_filters( 'wffn_optin_filter_webhook_fields', $post_fields ) ) );
 
-					$optin_webhook_request = wp_remote_post( $op_webhook_url, array( 'body' => apply_filters( 'wffn_optin_filter_webhook_fields', $post_fields ) ) );
+				if ( is_wp_error( $optin_webhook_request ) ) {
+					WFFN_Core()->logger->log( "Webhook Failure: " . $optin_webhook_request->get_error_message() );
 
-					if ( is_wp_error( $optin_webhook_request ) ) {
-						WFFN_Core()->logger->log( "Webhook Failure: " . $optin_webhook_request->get_error_message() );
-
-						return $posted_data; // Return false on error
-					}
-
-
-					return $posted_data;
-
+					return $posted_data; // Return false on error
 				}
-
 			}
 
 			return $posted_data;
-		}
 
+		}
 	}
 
 	if ( class_exists( 'WFOPP_Core' ) ) {

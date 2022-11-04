@@ -39,7 +39,9 @@ class SiteOrigin_Premium_WooCommerce_Show_Product_Images extends WP_Widget {
 				}
 			}
 			if ( function_exists( 'woocommerce_show_product_images' ) ) {
+				do_action( 'siteorigin_premium_addon_wctb_product_images_before' );
 				woocommerce_show_product_images();
+				do_action( 'siteorigin_premium_addon_wctb_product_images_after' );
 			}
 			if ( $sale_flash_enabled ) {
 				?></div><?php

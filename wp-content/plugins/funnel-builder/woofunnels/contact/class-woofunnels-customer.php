@@ -320,7 +320,7 @@ class WooFunnels_Customer {
 		$customer['total_order_count'] = $this->get_total_order_count();
 		$customer['total_order_value'] = $this->get_total_order_value();
 
-		$customer['aov'] = $customer['total_order_value'] / absint( $customer['total_order_count'] );
+		$customer['aov'] =  ( $customer['total_order_value'] > 0 ) ? $customer['total_order_value'] / absint( $customer['total_order_count'] ) : $customer['total_order_value'];
 
 		$purchased_products             = $this->get_purchased_products();
 		$purchased_products             = array_map( 'strval', $purchased_products );

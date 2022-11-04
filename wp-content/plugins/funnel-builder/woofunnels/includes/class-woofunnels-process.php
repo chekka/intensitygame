@@ -36,6 +36,7 @@ class WooFunnels_Process {
 		add_action( 'admin_head', array( $this, 'correct_sub_menu_order_legacy' ), 999 );
 
 		add_action( 'admin_init', array( $this, 'hide_plugins_update_notices' ) );
+		add_action( 'admin_footer', array( $this, 'print_css' ), 9999 );
 	}
 
 	public static function get_instance() {
@@ -415,29 +416,6 @@ class WooFunnels_Process {
 			$submenu_file = 'admin.php?page=' . $plugin_page;//phpcs:ignore
 		endif;
 
-		?>
-        <style>
-            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-menu-image:before {
-                content: none;
-            }
-
-            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-not-current-submenu .wp-menu-image {
-                background-image: url("<?php echo esc_url( plugin_dir_url( WooFunnel_Loader::$ultimate_path ) . 'woofunnels/assets/img/bwf-icon-grey.svg'); ?>") !important;
-            }
-
-            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-has-current-submenu .wp-menu-image {
-                background-image: url("<?php echo esc_url( plugin_dir_url( WooFunnel_Loader::$ultimate_path ) . 'woofunnels/assets/img/bwf-icon-white.svg'); ?>") !important;
-            }
-
-            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-menu-image {
-                background-repeat: no-repeat;
-                position: relative;
-                top: 5px;
-                background-position: 50% 25%;
-                background-size: 60%;
-            }
-        </style>
-		<?php
 	}
 
 	public function get_top_slug( $submenu ) {
@@ -747,5 +725,30 @@ class WooFunnels_Process {
 		delete_site_transient( 'update_plugins' );
 		global $wpdb;
 		$wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->options WHERE option_name LIKE %s", '%_bwf_version_cache_%' ) );
+	}
+
+	public function print_css() {
+		?>
+        <style>
+            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-menu-image:before {
+                content: none;
+            }
+
+            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-not-current-submenu .wp-menu-image {
+                background-image: url("<?php echo esc_url( plugin_dir_url( WooFunnel_Loader::$ultimate_path ) . 'woofunnels/assets/img/bwf-icon-grey.svg'); ?>") !important;
+            }
+
+            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-has-current-submenu .wp-menu-image {
+                background-image: url("<?php echo esc_url( plugin_dir_url( WooFunnel_Loader::$ultimate_path ) . 'woofunnels/assets/img/bwf-icon-white.svg'); ?>") !important;
+            }
+
+            .wp-admin #adminmenu .toplevel_page_woofunnels .wp-menu-image {
+                background-repeat: no-repeat;
+                position: relative;
+                top: 5px;
+                background-position: 50% 25%;
+                background-size: 60%;
+            }
+        </style> <?php
 	}
 }

@@ -36,6 +36,9 @@ if ( ! class_exists( 'WFFN_Compatibility_With_Perfmatters' ) ) {
 				return $status;
 			}
 
+			if(!is_array($GLOBALS['wp']->query_vars) || !isset($GLOBALS['wp']->query_vars['rest_route'])) {
+				return $status;
+			}
 			$rest_route = $GLOBALS['wp']->query_vars['rest_route'];
 
 			if ( strpos( $rest_route, 'woofunnel' ) !== false ) {

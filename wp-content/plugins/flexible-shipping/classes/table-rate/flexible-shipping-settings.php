@@ -45,15 +45,15 @@ class WPDesk_Flexible_Shipping_Settings extends WC_Shipping_Method {
 		$this->enabled      = 'no';
 		$this->method_title = __( 'Flexible Shipping Info', 'flexible-shipping' );
 
-		$this->supports = array(
+		$this->supports = [
 			'settings',
-		);
+		];
 
 		$this->logger_settings = new WPDesk_Flexible_Shipping_Logger_Settings( $this );
 
 		$this->init_form_fields();
 
-		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
+		add_action( 'woocommerce_update_options_shipping_' . $this->id, [ $this, 'process_admin_options' ] );
 	}
 
 	/**
@@ -97,15 +97,15 @@ class WPDesk_Flexible_Shipping_Settings extends WC_Shipping_Method {
 	 * Initialise Settings Form Fields.
 	 */
 	public function init_form_fields() {
-		$this->form_fields   = array(
-			'flexible_shipping' => array(
+		$this->form_fields   = [
+			'flexible_shipping' => [
 				'type' => 'flexible_shipping',
-			),
-		);
-		$this->form_fields[] = array(
+			],
+		];
+		$this->form_fields[] = [
 			'type'  => 'title',
 			'title' => __( 'Advanced settings', 'flexible-shipping' ),
-		);
+		];
 
 		$this->form_fields = $this->logger_settings->add_fields_to_settings( $this->form_fields );
 		$this->form_fields = $this->add_beacon_search_data_to_fields( $this->form_fields );
@@ -152,7 +152,7 @@ class WPDesk_Flexible_Shipping_Settings extends WC_Shipping_Method {
 	 * @return Metabox[]
 	 */
 	public function get_metaboxes() {
-		$metaboxes = array();
+		$metaboxes = [];
 
 		if ( 'pl_PL' === get_user_locale() ) {
 			$metaboxes[] = new WooCommerceABCPL();
@@ -164,6 +164,7 @@ class WPDesk_Flexible_Shipping_Settings extends WC_Shipping_Method {
 
 		if ( ! wpdesk_is_plugin_active( 'flexible-shipping-pro/flexible-shipping-pro.php' ) ) {
 			$metaboxes[] = new FSPro();
+		} else {
 			$metaboxes[] = new FSIE();
 		}
 

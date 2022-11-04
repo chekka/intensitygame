@@ -60,6 +60,9 @@ if ( ! class_exists( 'WFFN_Admin' ) ) {
 			add_filter( 'bwf_settings_config_general', array( $this, 'maybe_add_oxygen_in_global_settings' ) );
 			add_filter( 'bwf_experiment_ref_link', array( $this, 'maybe_modify_link' ), 10, 2 );
 
+			add_action( 'before_delete_post', array( $this, 'delete_funnel_step_permanently' ), 10, 2 );
+			add_filter( 'wffn_rest_get_funnel_steps', array( $this, 'maybe_delete_funnel_step' ), 10, 2 );
+
 
 		}
 
@@ -1566,6 +1569,71 @@ if ( ! class_exists( 'WFFN_Admin' ) ) {
 			}, 99999 );
 		}
 
+		/**
+		 * @param $post_id
+		 * @param $post
+		 *
+		 * hooked over `before_delete_post`
+		 * Checks if funnel step delete, then update associated funnel step meta
+		 * @return void
+		 */
+		public function delete_funnel_step_permanently( $post_id, $post ) {
+
+			if ( is_null( $post ) ) {
+				return;
+			}
+
+			if ( ! in_array( $post->post_type, array(
+				'wfacp_checkout',
+				'wffn_landing',
+				'wffn_ty',
+				'wffn_optin',
+				'wffn_oty',
+			) ) ) {
+				return;
+			}
+
+			$get_funnel_id = get_post_meta( $post_id, '_bwf_in_funnel', true );
+
+			if ( empty( $get_funnel_id ) ) {
+				return;
+			}
+
+			$funnel = WFFN_Core()->admin->get_funnel( $get_funnel_id );
+
+			if ( $funnel instanceof WFFN_Funnel ) {
+				$funnel->delete_step( $get_funnel_id, $post_id );
+			}
+
+		}
+
+		/**
+		 * @param $steps
+		 * @param $funnel
+		 *
+		 * Removed step if not exists on funnel steps listing
+		 * @return mixed
+		 */
+		public function maybe_delete_funnel_step( $steps, $funnel ) {
+
+			if ( is_array( $steps ) && count( $steps ) > 0 ) {
+				foreach ( $steps as $key => &$step ) {
+					/**
+					 * IF current step post not exist, then remove this step from funnel meta
+					 */
+					if ( $step['id'] > 0 && ! get_post( $step['id'] ) instanceof WP_Post ) {
+						unset( $steps[ $key ] );
+						if ( $funnel instanceof WFFN_Funnel ) {
+							$funnel->delete_step( $funnel->get_id(), $step['id'] );
+						}
+					}
+				}
+
+			}
+
+			return $steps;
+
+		}
 
 	}
 

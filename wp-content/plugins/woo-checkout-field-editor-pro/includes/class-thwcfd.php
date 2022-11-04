@@ -66,7 +66,8 @@ class THWCFD {
 		add_action('admin_enqueue_scripts', array($plugin_admin, 'enqueue_styles_and_scripts'));
 		add_action('admin_menu', array($plugin_admin, 'admin_menu'));
 		add_action('admin_head', array($plugin_admin,'review_banner_custom_css'));
-		add_action('admin_footer', array($plugin_admin,'review_banner_custom_js'));
+		add_action('admin_footer', array($plugin_admin,'review_banner_custom_js'),20);
+        add_action('admin_footer', array($plugin_admin,'quick_links'),10);
 		add_filter('woocommerce_screen_ids', array($plugin_admin, 'add_screen_id'));
 		add_filter('plugin_action_links_'.THWCFD_BASE_NAME, array($plugin_admin, 'plugin_action_links'));
 		add_action( 'admin_init', array( $plugin_admin, 'wcfd_notice_actions' ), 20 );
@@ -485,8 +486,8 @@ class THWCFD {
     }
     private function get_deactivation_reasons(){
         return array(
-        	'upgraded_to_wcfe_pro' => array(
-				'radio_val'          => 'upgraded_to_wcfe_pro',
+        	'upgraded_to_pro' => array(
+				'radio_val'          => 'upgraded_to_pro',
 				'radio_label'        => __('Upgraded to premium.', 'woo-extra-product-options'),
 				'reason_type'        => 'reviewlink',
 				'reason_placeholder' => '',

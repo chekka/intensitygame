@@ -2,8 +2,8 @@
 Requires at least: 4.7
 Tested up to: 6.0.2
 Requires PHP: 5.6.20
-Stable tag: 1.35.1
-Build time: 2022-09-29T22:42:04+02:00
+Stable tag: 1.35.2
+Build time: 2022-11-01T13:56:03+02:00
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -28,6 +28,9 @@ The SiteOrigin Premium plugin can be downloaded via the link provided in your or
 [Documentation](https://siteorigin.com/premium-documentation/) is available on SiteOrigin.com.
 
 == Changelog ==
+
+= 1.35.2 - 01 November 2022 =
+* WooCommerce Template Builder: Added support for NM Gift Registry and Wishlist non-thumbnail single product button positions.
 
 = 1.35.1 - 29 September 2022 =
 * Blog: Display excerpt related settings conditionally when `Post Content > Post Excerpt` is chosen.

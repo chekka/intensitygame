@@ -1,0 +1,12 @@
+@import url("../../../../../themes/lv-1871-new/resources/css/colors.min.css");
+@import url("../../../../../themes/lv-1871-new/resources/css/defaults.min.css");
+
+.so-widget-lv-jumpnav nav {
+  margin: 0 -12px;
+  width: (100% + 24px);
+}
+.so-widget-lv-jumpnav nav a {
+  font-size: 1.2em;
+  font-weight: 700;
+  padding: 3px 12px;
+}

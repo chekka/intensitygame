@@ -995,8 +995,8 @@ class WFACP_Divi_Form extends WFACP_Divi_HTML_BLOCK {
 		$primary_color = [
 			'%%order_class%% #wfacp-e-form  #payment li.wc_payment_method input.input-radio:checked::before',
 			'%%order_class%% #wfacp-e-form  #payment.wc_payment_method input[type=radio]:checked:before',
-			'%%order_class%% #wfacp-e-form  button[type=submit]',
-			'%%order_class%% #wfacp-e-form  button[type=button]',
+			'%%order_class%% #wfacp-e-form  button[type=submit]:not(.white):not(.black)',
+			'%%order_class%% #wfacp-e-form  button[type=button]:not(.white):not(.black)',
 			'%%order_class%% #wfacp-e-form .wfacp-coupon-section .wfacp-coupon-page .wfacp-coupon-field-btn',
 			'%%order_class%% #wfacp-e-form input[type=checkbox]:checked',
 			'%%order_class%% #wfacp-e-form #payment input[type=checkbox]:checked',

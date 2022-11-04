@@ -1748,14 +1748,35 @@ body .woocommerce-page #content input.button:hover:after {
     display: none;
 }
 
+
+
+.et-db #et-boc .et-l .woocommerce #content input.button.alt:after,
+.et-db #et-boc .et-l .woocommerce #content input.button:after,
+.et-db #et-boc .et-l .woocommerce #respond input#submit.alt:after,
+.et-db #et-boc .et-l .woocommerce #respond input#submit:after,
+.et-db #et-boc .et-l .woocommerce-page #content input.button.alt:after,
+.et-db #et-boc .et-l .woocommerce-page #content input.button:after,
+.et-db #et-boc .et-l .woocommerce-page #respond input#submit.alt:after,
+.et-db #et-boc .et-l .woocommerce-page #respond input#submit:after,
+.et-db #et-boc .et-l .woocommerce-page a.button.alt:after,
+.et-db #et-boc .et-l .woocommerce-page a.button:after,
+.et-db #et-boc .et-l .woocommerce-page button.button.alt:after,
+.et-db #et-boc .et-l .woocommerce-page button.button:after,
+.et-db #et-boc .et-l .woocommerce-page input.button.alt:after,
+.et-db #et-boc .et-l .woocommerce-page input.button:after,
+.et-db #et-boc .et-l .woocommerce a.button.alt:after,
+.et-db #et-boc .et-l .woocommerce button.button.alt:after,
+.et-db #et-boc .et-l .woocommerce button.button:after,
+.et-db #et-boc .et-l .woocommerce button.single_add_to_cart_button.button:after,
+.et-db #et-boc .et-l .woocommerce input.button.alt:after,
+.et-db #et-boc .et-l .woocommerce input.button:after,
 .et-db #et-boc .et-l #wfacp-e-form #place_order:after,
 .et-db #et-boc .et-l #wfacp-e-form .wfacp-next-btn-wrap button:after {
     opacity: 1;
-    font-family: inherit !important;
-    font-size: inherit;
+    font-family: 'bwf-icons' !important;
     margin: 0;
+    content: '';
 }
-
 .et-db #et-boc .et-l #wfacp-e-form #place_order:before,
 .et-db #et-boc .et-l #wfacp-e-form .wfacp-next-btn-wrap button:before {
     font-family: inherit;

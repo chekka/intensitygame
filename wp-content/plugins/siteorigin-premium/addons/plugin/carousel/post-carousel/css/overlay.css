@@ -9,9 +9,6 @@
 .sow-post-carousel-theme-overlay .sow-carousel-items {
   margin: 0 -12px;
 }
-.sow-post-carousel-theme-overlay .sow-carousel-items a {
-  text-decoration: none;
-}
 .sow-post-carousel-theme-overlay .sow-carousel-items .slick-track .sow-carousel-item {
   background-position: center;
   background-size: cover;

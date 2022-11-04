@@ -42,16 +42,45 @@ if ( ! class_exists( 'WFFN_Role_Capability' ) ) {
 				return false;
 			}
 
-			$config = apply_filters( 'wffn_user_access_capabilities', [
-				'administrator' => array(
-					'menu'      => array( 'read', 'write' ),
-					'funnel'    => array( 'read', 'write' ),
-					'analytics' => array( 'read', 'write' )
-				)
-			] );
+			/**
+			 * full access for administrator user
+			 */
+			if ( current_user_can( 'administrator' ) ) {
+				return 'administrator';
+			}
+
+			global $wp_roles;
+
+			$all_roles   = $wp_roles->roles;
+			$funnel_user = array();
+
+			/**
+			 * Set default user role for access full funnel
+			 */
+
+			if ( is_array( $all_roles ) && count( $all_roles ) > 0 ) {
+				foreach ( $all_roles as $role_name => $all_role ) {
+
+					/**
+					 * manage_options user have full funnel access permission
+					 */
+					if ( isset( $all_role['capabilities'] ) && isset( $all_role['capabilities']['manage_options'] ) && true === $all_role['capabilities']['manage_options'] ) {
+						$funnel_user[ $role_name ] = array(
+							'menu'      => array( 'read', 'write' ),
+							'funnel'    => array( 'read', 'write' ),
+							'analytics' => array( 'read', 'write' )
+						);
+					}
+				}
+			}
+
+			/**
+			 * Set user role capabilities for access full funnel
+			 */
+			$config = apply_filters( 'wffn_user_access_capabilities', $funnel_user, $all_roles );
 
 			$current_user_roles = $current_user->roles;
-			if ( is_array( $current_user_roles ) ) {
+			if ( is_array( $current_user_roles ) && count( $current_user_roles ) > 0 ) {
 				foreach ( $current_user_roles as $role ) {
 					if ( isset( $config[ $role ] ) && isset( $config[ $role ][ $cap ] ) && in_array( $access, $config[ $role ][ $cap ], true ) ) {
 						return $role;

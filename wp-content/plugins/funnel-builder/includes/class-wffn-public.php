@@ -606,7 +606,8 @@ if ( ! class_exists( 'WFFN_Public' ) ) {
 			}
 
 			$events = WFFN_Tracking_SiteWide::get_instance()->get_pending_events();
-			if ( ! is_null( $events ) ) {
+
+			if ( ! is_null( $events ) && is_array( $events ) && count( $events ) > 0 ) {
 				$message .= "<div id='wffn_late_event' dir='" . json_encode( $events ) . "'></div>"; //phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
 			}
 

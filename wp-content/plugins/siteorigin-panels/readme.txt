@@ -3,8 +3,8 @@ Tags: page builder, responsive, parallax, widgets, blocks, gallery, layout, grid
 Requires at least: 4.7
 Tested up to: 6.0
 Requires PHP: 5.6.20
-Stable tag: 2.17.0
-Build time: 2022-08-28T14:58:49+02:00
+Stable tag: 2.18.2
+Build time: 2022-10-26T18:48:57+02:00
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Donate link: https://siteorigin.com/downloads/premium/
@@ -106,6 +106,20 @@ We've tried to ensure that Page Builder is compatible with most plugin widgets. 
 SiteOrigin Premium includes access to our professional email support service, perfect for those times when you need fast and effective technical support. We're standing by to assist you in any way we can.
 
 == Changelog ==
+
+= 2.18.2 - 26 October 2022 =
+* Restored row re-ordering functionality.
+
+= 2.18.1 - 25 October 2022 =
+* Restored admin row background functionality.
+* Developer: Added `siteorigin_panels_admin_row_colors_default` to set the default admin row background color.
+
+= 2.18.0 - 22 October 2022 =
+* Box Shadow: Added a new `Inset` setting. Inset box shadows appear inside the row, cell, or widget.
+* Media Modal: Updated the title to `Choose Media`.
+* Developer: Added `siteorigin_panels_admin_row_colors` filter.
+* Developer: Added a client side event to allow for widget validation.
+* Developer: Accounted for a situation where `$panels_data` is passed as a string containing JSON rather than an array.
 
 = 2.17.0 - 28 August 2022 =
 * Row, Cell, and Widget Design Settings: Added Border Radius and Box Shadow settings.

@@ -5,7 +5,7 @@ Tags: checkout field editor, woocommerce checkout field editor, checkout manager
 Requires at least: 4.9
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.7.2
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,6 +225,7 @@ For more info on ThemeHigh and WooCommerce Checkout Field Editor plugin in speci
 *   The [Knowledge base](https://www.themehigh.com/docs/docs-category/checkout-field-editor-for-woocommerce/?utm_source=wcfe_free&utm_medium=readme&utm_campaign=help_docs).
 *   Other [WordPress Plugins](https://www.themehigh.com/plugins/?utm_source=wcfe_free&utm_medium=readme&utm_campaign=themehigh_plugins) by the ThemeHigh team.
 *   Follow ThemeHigh on [Facebook](https://www.facebook.com/ThemeHigh-319611541768603/), [LinkedIn](https://www.linkedin.com/company/themehigh/), [Twitter](https://twitter.com/themehigh/) & [YouTube](https://www.youtube.com/channel/UC-_uMXaC_21j1Y2_nGjTyvg/).
+*   Join our [Discord Server](https://discord.com/invite/pxqz4aJ6uh).
 
 == Installation ==
 = Minimum Requirements =
@@ -284,6 +285,11 @@ Yes. There is a button 'reset to default fields' to go back to the WooCommerce d
 9. Locale override settings
 
 == Changelog ==
+= 1.8.0 =
+* Added quick links in the plugin settings page and integrated with looped-in for idea submission.
+* Added an option to show custom fields on the My Account page.
+* Added WooCommerce 7.0 compatibility.
+
 = 1.7.2 =
 * Fixed the issue with [WooCommerce PayPal Payments](https://wordpress.org/plugins/woocommerce-paypal-payments/) plugin.
 * Added WooCommerce 6.8 compatibility.
@@ -490,7 +496,7 @@ Yes. There is a button 'reset to default fields' to go back to the WooCommerce d
 
 = 1.0.0 =
 * First Release
-* Add new checkout fields.
+* Add new checko.ut fields.
 * Edit checkout fields.
 * Remove checkout fields.
-* Change the display order of checkout fields.
+* Change the display order of checkout fields

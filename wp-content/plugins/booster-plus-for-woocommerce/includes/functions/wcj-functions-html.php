@@ -2,7 +2,7 @@
 /**
  * Booster for WooCommerce - Functions - HTML Functions
  *
- * @version 4.2.0
+ * @version 5.6.5
  * @author  Pluggabl LLC.
  */
 
@@ -108,7 +108,7 @@ if ( ! function_exists( 'wcj_empty_cart_button_html' ) ) {
 	/**
 	 * wcj_empty_cart_button_html.
 	 *
-	 * @version 3.7.0
+	 * @version 5.6.5
 	 * @since   2.8.0
 	 * @todo    optional function parameters instead of default `get_option()` calls
 	 */
@@ -118,6 +118,7 @@ if ( ! function_exists( 'wcj_empty_cart_button_html' ) ) {
 		return '<div style="' . wcj_get_option( 'wcj_empty_cart_div_style', 'float: right;' ) . '">' .
 			'<form action="" method="post"><input type="submit" class="' . wcj_get_option( 'wcj_empty_cart_button_class', 'button' ) . '" name="wcj_empty_cart" value="' .
 				apply_filters( 'booster_option', 'Empty Cart', wcj_get_option( 'wcj_empty_cart_text', 'Empty Cart' ) ) . '"' . $confirmation_html . '>' .
+				wp_nonce_field( 'wcj-empty-cart', 'wcj_empty_cart_nonce' ) .
 			'</form>' .
 		'</div>';
 	}

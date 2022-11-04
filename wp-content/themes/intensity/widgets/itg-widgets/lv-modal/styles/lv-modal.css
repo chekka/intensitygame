@@ -1,0 +1,30 @@
+@import url("../../../../../themes/lv-1871-new/resources/css/colors.min.css");
+@import url("../../../../../themes/lv-1871-new/resources/css/defaults.min.css");
+
+.so-widget-lv-modal {
+  position: relative;
+}
+
+.so-widget-lv-modal .image > img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.so-widget-lv-modal .overlay-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.lv-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 12;
+  background-color: #ccc;
+}

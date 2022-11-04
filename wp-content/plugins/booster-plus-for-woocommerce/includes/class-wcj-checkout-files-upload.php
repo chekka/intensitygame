@@ -2,7 +2,7 @@
 /**
  * Booster for WooCommerce - Module - Checkout Files Upload
  *
- * @version 5.2.0
+ * @version 5.6.5
  * @since   2.4.5
  * @author  Pluggabl LLC.
  */
@@ -224,37 +224,44 @@ class WCJ_Checkout_Files_Upload extends WCJ_Module {
 		);
 	}
 
-	/**
-	 * create_file_admin_order_meta_box.
-	 *
-	 * @version 3.4.0
-	 * @since   2.4.5
-	 */
-	function create_file_admin_order_meta_box() {
-		$order_id = get_the_ID();
-		$html = '';
-		$total_files = get_post_meta( $order_id, '_' . 'wcj_checkout_files_total_files', true );
-		$files_exists = false;
-		for ( $i = 1; $i <= $total_files; $i++ ) {
-			$order_file_name = get_post_meta( $order_id, '_' . 'wcj_checkout_files_upload_'           . $i, true );
-			$real_file_name  = get_post_meta( $order_id, '_' . 'wcj_checkout_files_upload_real_name_' . $i, true );
-			if ( '' != $order_file_name ) {
-				$files_exists = true;
-				$html .= '<p><a href="' . add_query_arg(
-					array(
-						'wcj_download_checkout_file_admin' => $order_file_name,
-						'wcj_checkout_file_number'         => $i,
-					) ) . '">' . $real_file_name . '</a></p>';
+		/**
+		 * Create_file_admin_order_meta_box.
+		 *
+		 * @version 5.6.5
+		 * @since   2.4.5
+		 */
+		public function create_file_admin_order_meta_box() {
+			$order_id     = get_the_ID();
+			$html         = '';
+			$total_files  = get_post_meta( $order_id, '_wcj_checkout_files_total_files', true );
+			$files_exists = false;
+			for ( $i = 1; $i <= $total_files; $i++ ) {
+				$order_file_name = get_post_meta( $order_id, '_wcj_checkout_files_upload_' . $i, true );
+				$real_file_name  = get_post_meta( $order_id, '_wcj_checkout_files_upload_real_name_' . $i, true );
+				if ( '' !== $order_file_name && null !== $order_file_name ) {
+					$files_exists = true;
+					$html        .= '<p><a href="' . add_query_arg(
+						array(
+							'wcj_download_checkout_file_admin' => $order_file_name,
+							'wcj_checkout_file_number' => $i,
+							'wcj_download_checkout_file_admin_nonce' => wp_create_nonce( 'wcj_download_checkout_file_admin_nonce' ),
+						)
+					) . '">' . $real_file_name . '</a></p>';
+				}
 			}
-		}
-		if ( ! $files_exists ) {
-			$html .= '<p><em>' . __( 'No files uploaded.', 'woocommerce-jetpack' ) . '</em></p>';
-		} else {
-			$html .= '<p><a style="color:#a00;" href="' . add_query_arg( 'wcj_download_checkout_file_admin_delete_all', $order_id ) . '"' . wcj_get_js_confirmation() . '>' .
+			if ( ! $files_exists ) {
+				$html .= '<p><em>' . __( 'No files uploaded.', 'woocommerce-jetpack' ) . '</em></p>';
+			} else {
+				$html .= '<p><a style="color:#a00;" href="' . add_query_arg(
+					array(
+						'wcj_download_checkout_file_admin_delete_all' => $order_id,
+						'wcj_download_checkout_file_admin_delete_all_nonce' => wp_create_nonce( 'wcj_download_checkout_file_admin_delete_all_nonce' ),
+					)
+				) . '"' . wcj_get_js_confirmation() . '>' .
 				__( 'Delete all files', 'woocommerce-jetpack' ) . '</a></p>';
+			}
+			echo wp_kses_post( $html );
 		}
-		echo $html;
-	}
 
 	/**
 	 * is_extension_blocked.
@@ -349,7 +356,7 @@ class WCJ_Checkout_Files_Upload extends WCJ_Module {
 	/**
 	 * process_checkout_files_upload.
 	 *
-	 * @version 3.9.0
+	 * @version 5.6.5
 	 * @since   2.4.5
 	 * @todo    add option for admin to delete files one by one (i.e. not all at once)
 	 * @todo    `$this->additional_admin_emails_settings` - more customization options, e.g.: admin email, subject, content, from
@@ -466,31 +473,58 @@ class WCJ_Checkout_Files_Upload extends WCJ_Module {
 		}
 		// Admin file download
 		if ( isset( $_GET['wcj_download_checkout_file_admin'] ) ) {
-			$tmp_file_name = wcj_get_wcj_uploads_dir( 'checkout_files_upload' ) . '/' . $_GET['wcj_download_checkout_file_admin'];
-			$file_name     = get_post_meta( $_GET['post'], '_' . 'wcj_checkout_files_upload_real_name_' . $_GET['wcj_checkout_file_number'], true );
-			if ( wcj_is_user_role( 'administrator' ) || is_shop_manager() ) {
-				header( "Expires: 0" );
-				header( "Cache-Control: must-revalidate, post-check=0, pre-check=0" );
-				header( "Cache-Control: private", false );
-				header( 'Content-disposition: attachment; filename=' . $file_name );
-				header( "Content-Transfer-Encoding: binary" );
-				header( "Content-Length: ". filesize( $tmp_file_name ) );
-				readfile( $tmp_file_name );
-				exit();
+			$wcj_download_checkout_file_admin_nonce = isset( $_GET['wcj_download_checkout_file_admin_nonce'] ) ? sanitize_key( wp_unslash( $_GET['wcj_download_checkout_file_admin_nonce'] ) ) : '';
+			$wpnonce                                = wp_verify_nonce( $wcj_download_checkout_file_admin_nonce, 'wcj_download_checkout_file_admin_nonce' );
+			if ( ! $wpnonce ) {
+				wp_safe_redirect( admin_url() );
+				return;
+			}
+
+			$tmp_file_name = wcj_get_wcj_uploads_dir( 'checkout_files_upload' ) . '/' . sanitize_file_name( wp_unslash( $_GET['wcj_download_checkout_file_admin'] ) );
+
+			$real_file_path = realpath( $tmp_file_name );
+			$real_base_path = realpath( wcj_get_wcj_uploads_dir( 'checkout_files_upload' ) ) . DIRECTORY_SEPARATOR;
+
+			if ( false === $real_file_path || 0 !== strpos( $real_file_path, $real_base_path ) ) {
+				wp_safe_redirect( admin_url() );
+				return; // Traversal attempt.
+			}
+			if ( isset( $_GET['post'] ) && isset( $_GET['wcj_checkout_file_number'] ) ) {
+				$file_name = get_post_meta( sanitize_text_field( wp_unslash( $_GET['post'] ) ), '_wcj_checkout_files_upload_real_name_' . sanitize_text_field( wp_unslash( $_GET['wcj_checkout_file_number'] ) ), true );
+				if ( wcj_is_user_role( 'administrator' ) || is_shop_manager() ) {
+					WC_Download_Handler::download_file_force( $tmp_file_name, $file_name );
+				}
 			}
 		}
 		// Admin all files delete
 		if ( isset( $_GET['wcj_download_checkout_file_admin_delete_all'] ) && ( wcj_is_user_role( 'administrator' ) || is_shop_manager() ) ) {
-			$order_id    = $_GET['wcj_download_checkout_file_admin_delete_all'];
-			$total_files = get_post_meta( $order_id, '_' . 'wcj_checkout_files_total_files', true );
-			for ( $i = 1; $i <= $total_files; $i++ ) {
-				if ( '' != ( $order_file_name = get_post_meta( $order_id, '_' . 'wcj_checkout_files_upload_' . $i, true ) ) ) {
-					unlink( wcj_get_wcj_uploads_dir( 'checkout_files_upload' ) . '/' . $order_file_name );
-				}
-				delete_post_meta( $order_id, '_' . 'wcj_checkout_files_upload_'           . $i );
-				delete_post_meta( $order_id, '_' . 'wcj_checkout_files_upload_real_name_' . $i );
+			$wcj_download_checkout_file_admin_delete_all_nonce = isset( $_GET['wcj_download_checkout_file_admin_delete_all_nonce'] ) ? sanitize_key( wp_unslash( $_GET['wcj_download_checkout_file_admin_delete_all_nonce'] ) ) : '';
+			$wpnonce = wp_verify_nonce( $wcj_download_checkout_file_admin_delete_all_nonce, 'wcj_download_checkout_file_admin_delete_all_nonce' );
+			if ( ! $wpnonce ) {
+				wp_safe_redirect( admin_url() );
+				return;
 			}
-			delete_post_meta( $order_id, '_' . 'wcj_checkout_files_total_files' );
+
+			$order_id    = sanitize_text_field( wp_unslash( $_GET['wcj_download_checkout_file_admin_delete_all'] ) );
+			$total_files = get_post_meta( $order_id, '_wcj_checkout_files_total_files', true );
+			for ( $i = 1; $i <= $total_files; $i++ ) {
+				$order_file_name = get_post_meta( $order_id, '_wcj_checkout_files_upload_' . $i, true );
+				if ( '' !== $order_file_name ) {
+					$tmp_file_name = wcj_get_wcj_uploads_dir( 'checkout_files_upload' ) . '/' . sanitize_file_name( wp_unslash( $order_file_name ) );
+
+					$real_file_path = realpath( $tmp_file_name );
+					$real_base_path = realpath( wcj_get_wcj_uploads_dir( 'checkout_files_upload' ) ) . DIRECTORY_SEPARATOR;
+
+					if ( false === $real_file_path || 0 !== strpos( $real_file_path, $real_base_path ) ) {
+					  continue;
+					} else {
+					  unlink( $tmp_file_name );
+					}
+				}
+				delete_post_meta( $order_id, '_wcj_checkout_files_upload_' . $i );
+				delete_post_meta( $order_id, '_wcj_checkout_files_upload_real_name_' . $i );
+			}
+			delete_post_meta( $order_id, '_wcj_checkout_files_total_files' );
 			wp_safe_redirect( remove_query_arg( 'wcj_download_checkout_file_admin_delete_all' ) );
 			exit;
 		}
