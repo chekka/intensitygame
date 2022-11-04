@@ -31,6 +31,6 @@
 		}
 	};
 
-	QTags.addButton('codelights', 'CodeLights', btnAction);
+	// QTags.addButton('codelights', 'CodeLights', btnAction);
 
 }(jQuery);
