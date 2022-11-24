@@ -131,6 +131,9 @@ function translate_sidecard_strings( $translated_text, $text, $domain ) {
         case 'Total' :
             $translated_text = __( 'Gesamtsumme', 'side-cart-woocommerce' );
             break;
+        case 'Update cart' :
+            $translated_text = __( 'Warenkorb &auml;ndern', 'siteorigin-premium' );
+            break;
 	}
 	return $translated_text;
 }

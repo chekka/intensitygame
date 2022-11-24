@@ -110,6 +110,16 @@
 
     /* END SLICK */
 
+    //******** Start Siteorigin Cart ********//
+    $('.woocommerce-cart-form__contents .product-quantity input').attr('disabled', 'disabled');
+    $('.woocommerce-cart-form__contents .actions button[type=submit]').on('click', function (event) {
+      event.preventDefault();
+      $('.xoo-wsc-modal .xoo-wsc-basket').click();
+      $('.xoo-wsch-close').hide();
+    });
+
+
+
   });
 
 

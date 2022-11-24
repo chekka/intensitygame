@@ -34,7 +34,11 @@ get_header( 'shop' ); ?>
 		<?php while ( have_posts() ) : ?>
 			<?php the_post(); ?>
 
-			<?php the_content(); ?>
+			<main class="main woo">
+  			<section id="content" class="woo container">
+					<?php the_content(); ?>
+				</section>
+			</main>
 
 		<?php endwhile; // end of the loop. ?>
 
@@ -47,14 +51,6 @@ get_header( 'shop' ); ?>
 		do_action( 'woocommerce_after_main_content' );
 	?>
 
-	<?php
-		/**
-		 * woocommerce_sidebar hook.
-		 *
-		 * @hooked woocommerce_get_sidebar - 10
-		 */
-		do_action( 'woocommerce_sidebar' );
-	?>
 
 <?php
 get_footer( 'shop' );
